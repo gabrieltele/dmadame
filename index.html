@@ -405,112 +405,13 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M4 12h15m-5-5 5 5-5 5"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
 </svg>
-<!-- Provador: studio mannequin photo (assets/provador/manequim.webp, 1125x2000) dressed with SVG outfits drawn in the photo's
-     own pixel coordinates. Each outfit re-applies the photo on top in multiply mode, so the fabric picks up the body's shading. -->
+<!-- Provador: warm studio backdrop; the look photos are multiplied onto it so their white background matches the frame -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <radialGradient id="mqStudio" gradientUnits="userSpaceOnUse" cx="600" cy="820" r="1250">
       <stop offset="0" stop-color="#f7f3ed"/><stop offset=".55" stop-color="#e9e2d8"/><stop offset="1" stop-color="#cfc5b8"/>
     </radialGradient>
-    <linearGradient id="mqShade" gradientUnits="userSpaceOnUse" x1="360" y1="0" x2="840" y2="0">
-      <stop offset="0" stop-color="#000" stop-opacity=".42"/><stop offset=".22" stop-color="#000" stop-opacity=".05"/><stop offset=".48" stop-color="#fff" stop-opacity=".08"/><stop offset=".78" stop-color="#000" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity=".42"/>
-    </linearGradient>
-    <linearGradient id="mqDrop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
-    <pattern id="mqPin" width="18" height="20" patternUnits="userSpaceOnUse"><rect width="18" height="20" fill="#4a4d56"/><rect x="8" width="2" height="20" fill="#c9cdd6" opacity=".7"/></pattern>
-    <linearGradient id="mqOff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eee4d2"/><stop offset="1" stop-color="#d9ccb5"/></linearGradient>
-    <linearGradient id="mqDenim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#96b0cf"/><stop offset=".55" stop-color="#b2c7df"/><stop offset="1" stop-color="#8aa4c4"/></linearGradient>
-    <linearGradient id="mqGraf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#686160"/><stop offset="1" stop-color="#4f4948"/></linearGradient>
-    <pattern id="mqPy" width="12" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-8) scale(1.5)">
-      <rect width="12" height="9" fill="#d5ccbb"/>
-      <path d="M0 4.5Q3 0 6 4.5T12 4.5M-6 9Q-3 4.5 0 9T6 9T12 9M-6 0Q-3-4.5 0 0T6 0T12 0" stroke="#7a7063" stroke-width=".9" fill="none"/>
-    </pattern>
-    <pattern id="mqPyBlot" width="46" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(-18) scale(1.45)">
-      <path d="M3 6c6-5 16-4 18 1 2 6-6 9-12 8S-1 10 3 6zM26 22c7-3 15-1 16 4 0 6-8 8-13 7s-7-8-3-11zM8 30c4-2 9 0 9 3s-5 5-8 4-4-5-1-7z" fill="#3f3831" opacity=".85"/>
-      <path d="M7 8c4-2 8-1 9 1s-3 4-6 3-5-2-3-4zM30 24c4-2 8 0 8 2s-4 3-6 3-4-3-2-5z" fill="#a39888"/>
-    </pattern>
-    <linearGradient id="mqBoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#060606"/><stop offset=".35" stop-color="#2d2a2a"/><stop offset=".55" stop-color="#0d0c0c"/><stop offset="1" stop-color="#050505"/></linearGradient>
     <filter id="mqSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
-
-    <!-- body: studio backdrop + the mannequin photo (identical in every look) -->
-    <g id="mqBody">
-      <rect x="-3000" y="-3000" width="7000" height="8000" fill="url(#mqStudio)"/>
-      <ellipse cx="520" cy="1978" rx="260" ry="22" fill="#5a4c40" opacity=".35" filter="url(#mqSoft)"/>
-      <image href="assets/provador/manequim.webp" width="1125" height="2000" style="mix-blend-mode:multiply"/>
-    </g>
-
-    <!-- shared garment shapes -->
-    <path id="gSleeves" d="M440 462C414 470 398 486 395 512 392 580 394 700 400 800 404 850 420 880 446 905L494 890C492 850 490 800 488 760 482 700 474 620 460 520ZM768 466C792 474 806 490 808 516 810 600 808 700 802 790 796 850 784 884 766 906L720 890C718 850 716 800 716 760 720 700 726 640 736 540Z"/>
-    <path id="gWide" d="M472 928C540 946 690 946 748 928 770 1000 786 1100 790 1250 796 1500 800 1750 794 1946L562 1946C570 1700 598 1420 628 1072 562 1400 506 1700 474 1946L298 1946C326 1700 378 1420 418 1200 440 1080 458 1000 472 928Z"/>
-    <path id="gJeans" d="M490 888C560 902 680 902 734 888 758 976 784 1100 790 1250 796 1500 800 1750 794 1946L562 1946C570 1700 598 1420 628 1072 562 1400 506 1700 474 1946L298 1946C326 1700 378 1420 418 1200 442 1070 470 960 490 888Z"/>
-
-    <!-- 1 · risca de giz -->
-    <path id="r1Blazer" d="M566 428C540 440 480 452 440 462 410 470 396 486 395 512 392 580 394 700 400 800 404 850 420 880 446 905L494 890 492 800C560 812 652 812 718 800L720 890 766 906C784 884 796 850 802 790 808 700 810 600 808 516 806 490 792 474 768 466 730 456 674 440 648 428L607 690Z"/>
-    <clipPath id="cpRisca"><use href="#r1Blazer"/><use href="#gWide"/></clipPath>
-    <g id="lkRisca">
-      <ellipse cx="380" cy="1958" rx="52" ry="15" fill="#111"/><ellipse cx="642" cy="1958" rx="48" ry="15" fill="#111"/>
-      <use href="#gWide" fill="url(#mqPin)"/><use href="#gWide" fill="url(#mqShade)"/><use href="#gWide" fill="url(#mqDrop)"/>
-      <path d="M548 950l-30 330M680 950l24 330M628 1080C614 1400 600 1700 590 1940" stroke="#000" stroke-opacity=".25" stroke-width="3" fill="none"/>
-      <path d="M472 928C540 946 690 946 748 928M474 948C540 966 688 966 750 948" stroke="#2b2d33" stroke-width="3" fill="none"/>
-      <path d="M298 1944H474M562 1944H794" stroke="#efece5" stroke-width="7"/>
-      <path d="M610 962c-26-16-50-4-32 12 10 8 22-4 32-12 10 8 22 20 32 12 18-16-6-28-32-12zM610 962l-18 84M610 962l14 76" stroke="#f6f3ec" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <use href="#r1Blazer" fill="url(#mqPin)"/><use href="#r1Blazer" fill="url(#mqShade)"/>
-      <path d="M576 438l-36 102 60 146M638 438l36 102-60 146M652 562l62-8v14l-61 8z" stroke="#24262b" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
-      <path d="M460 520c14 100 26 200 32 280M736 560c-10 80-18 160-18 240" stroke="#000" stroke-opacity=".3" stroke-width="3" fill="none"/>
-      <path d="M492 800c68 12 160 12 226 0" stroke="#efece5" stroke-width="6" fill="none"/>
-      <circle cx="607" cy="722" r="9" fill="#1b1c20"/>
-      <path d="M566 440c14 64 70 64 84 0" stroke="#d2ad74" stroke-width="14" fill="none" stroke-dasharray="11 5" stroke-linecap="round"/>
-      <image href="assets/provador/manequim.webp" width="1125" height="2000" clip-path="url(#cpRisca)" style="mix-blend-mode:multiply"/>
-    </g>
-
-    <!-- 2 · denim: jaqueta cropped off-white + jeans wide leg -->
-    <path id="r2Jacket" d="M566 428C540 440 480 452 440 462 410 470 396 486 395 512 392 580 394 700 400 800 404 850 420 880 446 905L494 890 492 806H718L720 890 766 906C784 884 796 850 802 790 808 700 810 600 808 516 806 490 792 474 768 466 730 456 674 440 648 428 630 446 584 446 566 428Z"/>
-    <clipPath id="cpDenim"><use href="#r2Jacket"/><use href="#gJeans"/></clipPath>
-    <g id="lkDenim">
-      <ellipse cx="380" cy="1958" rx="54" ry="16" fill="#f4f2ec"/><ellipse cx="642" cy="1958" rx="50" ry="16" fill="#f4f2ec"/>
-      <use href="#gJeans" fill="url(#mqDenim)"/><use href="#gJeans" fill="url(#mqShade)"/><use href="#gJeans" fill="url(#mqDrop)"/>
-      <path d="M490 902c70 14 176 14 244 0M492 928c70 14 174 14 240 0" stroke="#6b89ae" stroke-width="3.5" fill="none"/>
-      <path d="M612 936c0 60-4 110-10 140M500 1000L330 1940M726 1000l62 940M520 930c14 36 34 56 56 62M708 930c-14 36-34 56-56 62" stroke="#fff" stroke-opacity=".4" stroke-width="2.6" stroke-dasharray="7 7" fill="none"/>
-      <circle cx="612" cy="900" r="7" fill="#b07a4a"/><circle cx="612" cy="926" r="7" fill="#b07a4a"/>
-      <use href="#r2Jacket" fill="url(#mqOff)"/><use href="#r2Jacket" fill="url(#mqShade)"/>
-      <path d="M566 428l-30 50 66 20 5-36zM648 428l30 50-66 20-5-36z" fill="#f8f3ea" stroke="#c8bca8" stroke-width="3"/>
-      <path d="M607 500v306M510 580h80v66h-80zM624 580h80v66h-80zM510 604h80M624 604h80M460 520c14 100 26 200 32 280M736 560c-10 80-18 160-18 240M402 850h40M800 850h-40" stroke="#000" stroke-opacity=".16" stroke-width="3" fill="none"/>
-      <path d="M494 812h224" stroke="#eee6d8" stroke-width="14" stroke-dasharray="3 6"/>
-      <g fill="#c4c4c4"><circle cx="616" cy="540" r="6"/><circle cx="616" cy="620" r="6"/><circle cx="616" cy="700" r="6"/><circle cx="616" cy="780" r="6"/></g>
-      <image href="assets/provador/manequim.webp" width="1125" height="2000" clip-path="url(#cpDenim)" style="mix-blend-mode:multiply"/>
-    </g>
-
-    <!-- 3 · macacão pantalona grafite -->
-    <path id="r3Jump" d="M578 430C552 436 500 448 478 458 470 480 468 500 470 522 474 600 480 680 486 760 490 820 494 860 494 890 480 930 466 990 450 1080 410 1300 330 1700 298 1946H474C506 1700 562 1400 628 1072 598 1420 570 1700 562 1946H794C800 1750 796 1500 790 1250 786 1100 766 990 730 930 722 890 718 840 718 800 718 720 724 640 734 540 740 500 740 480 736 460 712 448 662 436 636 430L607 720Z"/>
-    <clipPath id="cpGrafite"><use href="#r3Jump"/></clipPath>
-    <g id="lkGrafite">
-      <ellipse cx="380" cy="1958" rx="52" ry="15" fill="#111"/><ellipse cx="642" cy="1958" rx="48" ry="15" fill="#111"/>
-      <use href="#r3Jump" fill="url(#mqGraf)"/><use href="#r3Jump" fill="url(#mqShade)"/><use href="#r3Jump" fill="url(#mqDrop)"/>
-      <path d="M607 720v350M540 930l-40 360M690 930l30 360M496 890c70 14 160 14 222 0" stroke="#000" stroke-opacity=".26" stroke-width="3" fill="none"/>
-      <path d="M504 940l-24 240M722 940l20 240" stroke="#3b3635" stroke-width="4" fill="none"/>
-      <path d="M562 408c16 30 72 30 88 0" stroke="#d2ad74" stroke-width="9" fill="none" stroke-linecap="round"/>
-      <image href="assets/provador/manequim.webp" width="1125" height="2000" clip-path="url(#cpGrafite)" style="mix-blend-mode:multiply"/>
-    </g>
-
-    <!-- 4 · noite: blusa chiffon + saia python + bota -->
-    <path id="r4Top" d="M566 428C540 440 482 454 462 474L458 520C470 620 484 720 494 880H718C716 760 724 700 732 600L746 474C726 454 674 440 648 428 630 446 584 446 566 428Z"/>
-    <path id="r4Puff" d="M462 468C402 480 368 540 370 640 372 760 394 850 432 906L474 898C482 800 480 650 470 520ZM746 468C806 480 840 540 838 640 836 760 814 850 778 906L738 898C728 800 728 650 736 520Z"/>
-    <path id="r4Skirt" d="M494 868C560 882 660 882 720 868 742 930 760 1000 772 1052 782 1092 790 1112 796 1138 700 1154 520 1154 424 1138 438 1080 454 1020 468 962 478 922 488 890 494 868Z"/>
-    <path id="r4Boots" d="M394 1420C380 1500 375 1600 376 1700 376 1800 366 1860 350 1900 336 1932 330 1960 344 1974H422C426 1940 426 1900 430 1860 440 1800 448 1740 454 1680 464 1600 482 1500 502 1420ZM638 1420C634 1500 622 1600 620 1700 616 1800 602 1860 600 1900 598 1936 596 1960 602 1974H686C688 1950 684 1920 682 1890 682 1820 686 1760 696 1700 712 1600 738 1500 747 1420Z"/>
-    <clipPath id="cpNoite"><use href="#r4Top"/><use href="#r4Skirt"/><use href="#r4Boots"/></clipPath>
-    <g id="lkNoite">
-      <use href="#r4Boots" fill="url(#mqBoot)"/>
-      <path d="M404 1440c-10 140-14 300-22 460M654 1440c-6 140-18 300-34 460" stroke="#fff" stroke-opacity=".16" stroke-width="5" fill="none"/>
-      <path d="M394 1422h108M638 1422h109" stroke="#222" stroke-width="6"/>
-      <use href="#r4Skirt" fill="url(#mqPy)"/><use href="#r4Skirt" fill="url(#mqPyBlot)"/><use href="#r4Skirt" fill="url(#mqShade)"/>
-      <use href="#r4Top" fill="#161316"/><use href="#r4Top" fill="url(#mqShade)"/>
-      <use href="#r4Puff" fill="#141114" opacity=".74"/><use href="#r4Puff" fill="url(#mqShade)" opacity=".6"/>
-      <path d="M400 894c20 22 60 22 80 0v24c-20 16-60 16-80 0zM740 894c20 22 60 22 80 0v24c-20 16-60 16-80 0z" fill="#141114"/>
-      <path d="M404 866h64v18h-64zM744 866h64v18h-64z" fill="#d2ad74"/>
-      <path d="M470 520c30 34 50 0 76 34 26-34 52 4 78-22 26 34 52 0 78 30 22-26 38 12 50-8l-10 50c-26-22-48 8-74-18-26 30-52 0-78 22-26-30-52 4-78-26-22 26-38-4-50 8z" fill="#221e22"/>
-      <path d="M652 436c18 8 30 26 22 48-4 16-22 8-18-8M652 436c-8 22-4 46 12 60" stroke="#221e22" stroke-width="9" fill="none" stroke-linecap="round"/>
-      <path d="M580 438c10 16 44 16 54 0" stroke="#d2ad74" stroke-width="4" fill="none"/>
-      <image href="assets/provador/manequim.webp" width="1125" height="2000" clip-path="url(#cpNoite)" style="mix-blend-mode:multiply"/>
-    </g>
   </defs>
 </svg>
 
@@ -833,20 +734,20 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   $$('.fav').forEach(b => b.addEventListener('click', e => { e.preventDefault(); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); }));
 
   /* ---------- provador (outfit changes on the pinned model) ----------
-     Each look uses the digital mannequin (`svg`: id of an outfit group in #mqBody's sprite).
-     To use photos instead, give a look `img` (+ optional `pos`) with pictures of ONE model in the
-     SAME pose, camera and light (see assets/provador/LEIA-ME.txt). */
+     `photo`: picture of the SAME mannequin (1131x2000, white background) in each look.
+     `dx`/`dy` shift it in image pixels so the head and body sit in the exact same spot in every look
+     (see assets/provador/LEIA-ME.txt). */
   const FIT_LOOKS = [
-    { svg: 'lkRisca', col: 'Coleção cidade', name: 'Risca de <em>giz</em>',
+    { photo: 'assets/provador/look-1.webp', dx: -19, dy: -3, col: 'Coleção cidade', name: 'Risca de <em>giz</em>',
       desc: 'Blazer cropped e pantalona com cordão: o poder da alfaiataria com o conforto de um moletom.',
       pieces: [['Blazer cropped risca de giz', '#4b4f5c', 'Blazer'], ['Pantalona com cordão', '#4b4f5c', 'Calça']] },
-    { svg: 'lkDenim', col: 'Casual chic', name: 'Denim <em>off-white</em>',
+    { photo: 'assets/provador/look-2.webp', dx: 5, dy: -5, col: 'Casual chic', name: 'Denim <em>off-white</em>',
       desc: 'Jaqueta cropped de sarja com barra desfiada e jeans wide leg de cintura dupla.',
       pieces: [['Jaqueta cropped off-white', '#eee6d8', 'Jaqueta'], ['Jeans wide leg', '#a9c1dc', 'Calça']] },
-    { svg: 'lkGrafite', col: 'Essenciais', name: 'Grafite <em>fluido</em>',
+    { photo: 'assets/provador/look-3.webp', dx: -1, dy: 5, col: 'Essenciais', name: 'Grafite <em>fluido</em>',
       desc: 'Macacão pantalona com decote V e bolsos laterais. Uma peça, look completo.',
       pieces: [['Macacão pantalona grafite', '#5e5857', 'Macacão']] },
-    { svg: 'lkNoite', col: 'Noite', name: 'Preto & <em>python</em>',
+    { photo: 'assets/provador/look-4.webp', dx: 16, dy: 3, col: 'Noite', name: 'Preto & <em>python</em>',
       desc: 'Blusa de chiffon com mangas bufantes e saia curta estampa python para as noites especiais.',
       pieces: [['Blusa chiffon preta', '#111', 'Blusa'], ['Saia python', '#b9ae9c', 'Saia']] }
   ];
@@ -854,9 +755,10 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   fit.style.setProperty('--n', FIT_LOOKS.length);
   const fitFrame = $('#fitFrame'), fitLine = $('#fitLine');
   fitFrame.insertAdjacentHTML('afterbegin', FIT_LOOKS.map((l, i) =>
-    `<div class="fit-layer" style="--pos:${l.pos || '50% 10%'}">${l.img
-      ? `<img src="${l.img}" alt="Look ${i + 1}" ${i ? 'loading="lazy"' : ''}>`
-      : `<svg viewBox="200 90 820 1900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Manequim vestindo o look ${i + 1}"><use href="#mqBody"/><use href="#${l.svg}"/></svg>`}</div>`).join(''));
+    `<div class="fit-layer"><svg viewBox="-65 60 1347 1930" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Manequim vestindo o look ${i + 1}: ${l.name.replace(/<[^>]+>/g, '')}">
+      <rect x="-3000" y="-3000" width="7000" height="8000" fill="url(#mqStudio)"/>
+      <ellipse cx="608" cy="1935" rx="250" ry="20" fill="#5a4c40" opacity=".3" filter="url(#mqSoft)"/>
+      <image href="${l.photo}" x="${l.dx}" y="${l.dy}" width="1131" height="2000" style="mix-blend-mode:multiply"/></svg></div>`).join(''));
   $('#fitInfo').innerHTML = FIT_LOOKS.map((l, i) => `
     <article class="fit-look${i ? '' : ' on'}" ${i ? 'aria-hidden="true"' : ''}>
       <div class="col">${l.col}</div>

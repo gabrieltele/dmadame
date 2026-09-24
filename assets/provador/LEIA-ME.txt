@@ -1,15 +1,13 @@
 PROVADOR D'MADAME
 =================
 
-Como funciona hoje
-- manequim.webp é a foto base do manequim (1125 x 2000 px).
-- As roupas são desenhadas em SVG dentro do index.html (procure "lkRisca", "lkDenim",
-  "lkGrafite", "lkNoite"), nas mesmas coordenadas em pixels da foto.
-- Por cima da roupa a foto do manequim é reaplicada em modo "multiply": assim o tecido
-  ganha as sombras do corpo (busto, joelhos, dobras).
-- A lista de looks, textos e peças fica em FIT_LOOKS (no index.html).
+Fotos atuais: look-1.webp ... look-4.webp (mesmo manequim, 1131 x 2000 px, fundo branco).
+A lista de looks, textos e peças fica em FIT_LOOKS, no index.html.
 
-Para trocar por fotos reais (opcional)
-- Mesma modelo, mesma pose, mesma câmera no tripé, mesma luz e fundo.
-- Corpo inteiro, vertical, ~3:4. Salve aqui como look-1.jpg, look-2.jpg...
-- Em FIT_LOOKS troque  svg: 'lkRisca'  por  img: 'assets/provador/look-1.jpg'
+Para adicionar ou trocar um look
+1. Use uma foto do MESMO manequim, na mesma pose, câmera e luz, com fundo branco.
+2. Salve nesta pasta (ex.: look-5.webp) e adicione um item em FIT_LOOKS com
+   photo: 'assets/provador/look-5.webp', dx: 0, dy: 0
+3. dx / dy movem a foto em pixels para a cabeça ficar no mesmo lugar das outras
+   (referência: centro da cabeça em x = 608 e topo da cabeça em y = 93).
+A seção ajusta sozinha a altura, o contador e a barra de progresso.
