@@ -1013,6 +1013,9 @@ footer{position:relative;padding:90px 0 34px;overflow:hidden;border-top:1px soli
   const progress = $('.progress');
   const cssTimeline = CSS.supports('animation-timeline: scroll()');
   const wa = $('.wa-float');
+  // hide the floating WhatsApp button at the footer's last row so it never covers "voltar ao topo"
+  let footEnd = false;
+  new IntersectionObserver(([e]) => footEnd = e.isIntersecting).observe($('.foot-bottom'));
   // provador state: `fitSeg` is the smoothed scroll position measured in looks (0 … N-1)
   const fitLayers = $$('.fit-layer', fitFrame), fitLooks = $$('.fit-look'), fitBars = $$('#fitBars button');
   const fitNum = $('#fitNum'), fitTag = $('#fitTag'), fitN = FIT_LOOKS.length;
@@ -1063,7 +1066,7 @@ footer{position:relative;padding:90px 0 34px;overflow:hidden;border-top:1px soli
     // nav glass + hide on scroll down
     nav.classList.toggle('scrolled', y > 40);
     if (Math.abs(y - lastY) > 4) { const dir = y > lastY ? 1 : -1; if (dir !== lastDir) { nav.classList.toggle('hide', dir === 1 && y > 600 && !document.body.classList.contains('nav-open')); lastDir = dir; } }
-    wa.classList.toggle('show', y > vh * .7);
+    wa.classList.toggle('show', y > vh * .7 && !footEnd);
     if (!cssTimeline) progress.style.transform = `scaleX(${clamp(y / (document.documentElement.scrollHeight - vh), 0, 1)})`;
 
     updateFit();
