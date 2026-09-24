@@ -1,0 +1,23 @@
+PROVADOR D'MADAME — FOTOS PARA O EFEITO DE TROCA DE ROUPA
+==========================================================
+
+O efeito fica perfeito quando todas as fotos mostram a MESMA modelo,
+e a única coisa que muda entre elas é a roupa.
+
+Como fotografar (ou gerar) as imagens:
+- Mesma modelo, mesma pose, mesma expressão.
+- Câmera no tripé: mesma altura, distância, lente e zoom em todas.
+- Mesma luz e mesmo fundo (de preferência liso, escuro ou neutro).
+- Corpo inteiro, vertical, com a cabeça perto do topo e os pés perto da base.
+- Proporção vertical ~3:4 (ex.: 1500 x 2150 px), JPG com qualidade ~80%.
+
+Nomes sugeridos (coloque nesta pasta):
+  look-1.jpg, look-2.jpg, look-3.jpg, look-4.jpg ...
+
+Depois, no index.html, procure FIT_LOOKS e troque o campo img de cada look:
+  img: 'assets/provador/look-1.jpg'
+
+Para adicionar ou remover looks, basta adicionar ou remover itens em FIT_LOOKS:
+a seção ajusta a altura, a barra de progresso e o contador sozinha.
+Os campos pos (enquadramento) e sc (zoom) servem para alinhar alguma foto
+que tenha ficado um pouco deslocada.
