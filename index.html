@@ -55,18 +55,6 @@ a{color:inherit;text-decoration:none}
 .curtain.out .curtain-logo{opacity:0;transform:translateY(-30px)}
 .curtain-logo .word{font-family:var(--serif);font-size:30px;letter-spacing:.3em;text-transform:uppercase}
 
-/* ---------- cursor ---------- */
-.cursor-dot,.cursor-ring,.cursor-glow{position:fixed;top:0;left:0;pointer-events:none;z-index:150;display:none}
-.has-cursor .cursor-dot,.has-cursor .cursor-ring,.has-cursor .cursor-glow{display:block}
-.cursor-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--cream)}
-.cursor-ring{width:38px;height:38px;margin:-19px 0 0 -19px}
-.cursor-ring i{position:absolute;inset:0;border:1px solid rgba(241,231,216,.45);border-radius:50%;transition:transform .5s var(--ease),background .4s,border-color .4s;display:grid;place-items:center;font-style:normal;font-size:0;letter-spacing:.12em;text-transform:uppercase;color:var(--bg)}
-.cursor-ring.hover i{transform:scale(1.7);border-color:rgba(210,173,116,.7);background:rgba(210,173,116,.08)}
-.cursor-ring.label i{transform:scale(2.3);background:var(--cream);border-color:transparent;font-size:5px;font-weight:600}
-.cursor-glow{width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;z-index:1;
-  background:radial-gradient(circle,rgba(195,36,59,.12),rgba(210,173,116,.05) 40%,transparent 65%);mix-blend-mode:screen}
-.has-cursor,.has-cursor a,.has-cursor button{cursor:none}
-
 /* ---------- nav ---------- */
 .nav{position:fixed;inset:14px 0 auto;z-index:100;transition:transform .7s var(--ease)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 12px 10px 14px;border-radius:999px;border:1px solid transparent;transition:background .6s var(--ease),border-color .6s,backdrop-filter .6s}
@@ -270,22 +258,6 @@ em.wi{font-style:italic;color:var(--gold)}
 .prod-info .dots{display:flex;gap:5px;padding-top:6px}
 .prod-info .dots i{width:10px;height:10px;border-radius:50%;box-shadow:0 0 0 1px var(--line)}
 
-/* editorial / 3D parallax */
-.editorial{overflow:hidden}
-.ed-grid{display:grid;gap:64px;align-items:center}
-@media(min-width:960px){.ed-grid{grid-template-columns:1.05fr .95fr}}
-.ed-stage{position:relative;aspect-ratio:1/1.05;perspective:1200px}
-.ed-stage .pl{position:absolute;will-change:transform}
-.ed-stage .pl1{left:0;top:6%;width:62%}
-.ed-stage .pl2{right:0;top:0;width:44%}
-.ed-stage .pl3{right:8%;bottom:0;width:40%}
-.ed-stage .pl .media{box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
-.ed-stage .ring{position:absolute;left:40%;top:30%;width:44%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(210,173,116,.3)}
-.ed-copy p{color:var(--muted);font-weight:300;max-width:46ch}
-.ed-list{list-style:none;padding:0;margin:32px 0 40px;display:grid;gap:0}
-.ed-list li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px}
-.ed-list li span{color:var(--muted)}
-
 /* lookbook chapters: sticky stacked frames swapped by scroll */
 .chap-grid{display:grid;gap:40px}
 @media(min-width:960px){.chap-grid{grid-template-columns:1fr 1fr;gap:80px}}
@@ -318,48 +290,23 @@ em.wi{font-style:italic;color:var(--gold)}
 .chap.on .chap-in{opacity:1;filter:none}
 @media(max-width:959px){.chap-in{opacity:1;filter:none}}
 
-/* gallery (masonry + lightbox) */
-.gallery{columns:2;column-gap:12px}
-@media(min-width:768px){.gallery{columns:3;column-gap:16px}}
-@media(min-width:1200px){.gallery{columns:4}}
-.g-item{position:relative;display:block;width:100%;margin:0 0 12px;padding:0;border:0;background:var(--bg3);border-radius:18px;overflow:hidden;break-inside:avoid;color:inherit}
-@media(min-width:768px){.g-item{margin-bottom:16px}}
-.g-item img{width:100%;height:auto;display:block;transform:scale(1.02);transition:transform 1.4s var(--ease),filter 1s var(--ease)}
-.g-item:hover img{transform:scale(1.09)}
-.g-item .cap{position:absolute;z-index:4;left:0;right:0;bottom:0;padding:40px 16px 14px;text-align:left;font-family:var(--serif);font-style:italic;font-size:18px;background:linear-gradient(transparent,rgba(12,10,9,.75));transform:translateY(12px);opacity:0;transition:transform .7s var(--ease),opacity .7s var(--ease)}
-.g-item:hover .cap,.g-item:focus-visible .cap{transform:none;opacity:1}
-@media(hover:none){.g-item .cap{opacity:1;transform:none;font-size:15px}}
-.lb{position:fixed;inset:0;z-index:180;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(8,7,6,.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--cream);opacity:0;transition:opacity .6s var(--ease),display .6s allow-discrete,overlay .6s allow-discrete}
-.lb[open]{display:grid;place-items:center;opacity:1}
-@starting-style{.lb[open]{opacity:0}}
-.lb::backdrop{background:transparent}
-.lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px}
-.lb img{max-width:min(92vw,900px);max-height:80vh;border-radius:20px;box-shadow:0 40px 120px -30px #000;transition:opacity .45s var(--ease),transform .7s var(--ease),filter .6s var(--ease)}
-.lb img.swap{opacity:0;transform:scale(.96);filter:blur(10px)}
-.lb figcaption{font-family:var(--serif);font-style:italic;font-size:22px}
-.lb figcaption small{font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.24em;color:var(--muted);margin-left:12px}
-.lb-btn{position:absolute;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:var(--cream);border:1px solid var(--line);background:rgba(241,231,216,.05);backdrop-filter:blur(10px);transition:background .4s,border-color .4s}
-.lb-btn:hover{background:rgba(210,173,116,.15);border-color:rgba(210,173,116,.5)}
-.lb-btn svg{width:18px;height:18px}
-.lb-close{top:20px;right:20px}
-.lb-prev{left:20px;top:50%;margin-top:-27px}.lb-prev svg{transform:rotate(180deg)}
-.lb-next{right:20px;top:50%;margin-top:-27px}
-@media(max-width:700px){.lb-prev,.lb-next{top:auto;bottom:24px;margin:0}.lb-prev{left:calc(50% - 64px)}.lb-next{right:calc(50% - 64px)}}
-
 /* ---------- provador: pinned model whose outfit morphs with scroll ---------- */
 .fit{position:relative;height:calc(var(--n) * 95vh + 40vh)}
-.fit-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;align-items:center}
+.fit-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-columns:100%;align-items:center}
 .fit-grid{display:grid;gap:56px;align-items:center;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
 .fit-stage{position:relative;height:min(84vh,860px);aspect-ratio:3/4.3;max-width:100%;justify-self:center}
 .fit-glow{position:absolute;inset:8% -14% -4%;background:radial-gradient(closest-side,rgba(195,36,59,.32),rgba(125,18,36,.12) 55%,transparent);filter:blur(30px);pointer-events:none}
 .fit-floor{position:absolute;left:12%;right:12%;bottom:-3%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.7),transparent);filter:blur(8px)}
 .fit-frame{--cr:260px 260px 28px 28px;position:absolute;inset:0;border-radius:260px 260px 28px 28px;overflow:hidden;background:var(--bg3);box-shadow:0 50px 110px -40px rgba(0,0,0,.95)}
 .fit-frame::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(241,231,216,.14);background:linear-gradient(180deg,rgba(12,10,9,.25),transparent 18%,transparent 70%,rgba(12,10,9,.6))}
-.fit-layer{position:absolute;inset:0;--k:0}
-.fit-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 10%);transform:scale(var(--sc,1))}
-/* incoming outfit: soft feathered edge travels top→bottom, driven by scroll (--k 0→1) */
-.fit-layer+.fit-layer{-webkit-mask-image:linear-gradient(180deg,#000 calc(var(--k) * 130% - 30%),transparent calc(var(--k) * 130%));mask-image:linear-gradient(180deg,#000 calc(var(--k) * 130% - 30%),transparent calc(var(--k) * 130%))}
-.fit-layer+.fit-layer img{filter:blur(calc((1 - var(--k)) * 6px)) brightness(calc(.85 + var(--k) * .15));transform:scale(calc(var(--sc,1) * (1.035 - var(--k) * .035)))}
+.fit-frame::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 30% at 50% 0%,rgba(255,236,205,.2),transparent 70%),linear-gradient(180deg,transparent 88%,rgba(241,231,216,.05) 88%,rgba(0,0,0,.3))}
+.fit-frame{background:radial-gradient(ellipse 75% 55% at 50% 40%,#3a2f29,#1a1513 62%,#100d0c)}
+/* each look is a full figure; --a reveals it top→bottom, --b hides it as the next look arrives (both driven by scroll) */
+.fit-layer{position:absolute;inset:0;--a:1;--b:0;
+  -webkit-mask-image:linear-gradient(180deg,#000 calc(var(--a) * 130% - 30%),transparent calc(var(--a) * 130%)),linear-gradient(180deg,transparent calc(var(--b) * 130% - 30%),#000 calc(var(--b) * 130%));
+  mask-image:linear-gradient(180deg,#000 calc(var(--a) * 130% - 30%),transparent calc(var(--a) * 130%)),linear-gradient(180deg,transparent calc(var(--b) * 130% - 30%),#000 calc(var(--b) * 130%));
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.fit-layer>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 10%);filter:blur(calc((1 - var(--a)) * 5px));transform:scale(calc(1.025 - var(--a) * .025))}
 .fit-line{position:absolute;z-index:5;left:-10%;right:-10%;height:120px;margin-top:-60px;top:var(--ly,0%);opacity:var(--lo,0);pointer-events:none;
   background:radial-gradient(50% 50% at 50% 50%,rgba(255,236,205,.28),transparent 70%)}
 .fit-line::before{content:"";position:absolute;left:10%;right:10%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,240,215,.95) 30%,#fff 50%,rgba(255,240,215,.95) 70%,transparent);box-shadow:0 0 18px 2px rgba(210,173,116,.7)}
@@ -391,7 +338,8 @@ em.wi{font-style:italic;color:var(--gold)}
 @media(max-width:860px){
   .fit{height:calc(var(--n) * 80vh + 30vh)}
   .fit-pin{align-items:start;padding-top:74px}
-  .fit-grid{grid-template-columns:1fr;gap:18px}
+  .fit-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  .fit-tag{display:none}
   .fit-stage{height:auto;width:min(62vw,300px);max-height:52svh}
   .fit-frame{border-radius:200px 200px 22px 22px}
   .fit-side h2,.fit-side .eyebrow{display:none}
@@ -404,7 +352,7 @@ em.wi{font-style:italic;color:var(--gold)}
   .pieces li span{display:none}
   .fit-look .link-arrow{display:none}
   .fit-prog{justify-content:center;margin-top:12px}
-  .fit-layer+.fit-layer img{filter:none}
+  .fit-layer>*{filter:none}
 }
 @media(max-width:860px) and (min-width:600px){.fit-stage{width:min(44vw,340px)}.fit-look p{display:block;margin-inline:auto}}
 
@@ -449,7 +397,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
   .js .rv,.js .wi{opacity:1;transform:none;filter:none}
   .js .clip{clip-path:none}
-  .grain,.cursor-glow{display:none}
+  .grain{display:none}
   .marquee-track{animation:none}
 }
 </style>
@@ -460,6 +408,112 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M4 12h15m-5-5 5 5-5 5"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
 </svg>
+<!-- Digital mannequin for the Provador: one body (#mqBody) + one group per outfit. Rendered with <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="mqSkin" gradientUnits="userSpaceOnUse" x1="104" y1="0" x2="296" y2="0">
+      <stop offset="0" stop-color="#a88f78"/><stop offset=".3" stop-color="#e2d2bf"/><stop offset=".52" stop-color="#f1e5d6"/><stop offset=".75" stop-color="#d8c6b1"/><stop offset="1" stop-color="#9c846e"/>
+    </linearGradient>
+    <radialGradient id="mqHead" cx=".42" cy=".4" r=".7"><stop offset="0" stop-color="#f3e8da"/><stop offset=".7" stop-color="#d9c7b2"/><stop offset="1" stop-color="#a88f78"/></radialGradient>
+    <linearGradient id="mqHair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a3226"/><stop offset="1" stop-color="#1e140f"/></linearGradient>
+    <!-- fabric shading: darkens the sides so flat shapes read as volume -->
+    <linearGradient id="mqShade" gradientUnits="userSpaceOnUse" x1="96" y1="0" x2="304" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".5"/><stop offset=".26" stop-color="#000" stop-opacity=".06"/><stop offset=".5" stop-color="#fff" stop-opacity=".07"/><stop offset=".76" stop-color="#000" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".5"/>
+    </linearGradient>
+    <linearGradient id="mqFold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+    <pattern id="mqPin" width="7" height="10" patternUnits="userSpaceOnUse"><rect width="7" height="10" fill="#4b4e57"/><rect x="3" width=".8" height="10" fill="#c3c7d0" opacity=".7"/></pattern>
+    <linearGradient id="mqOff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4ede1"/><stop offset="1" stop-color="#e4d9c7"/></linearGradient>
+    <linearGradient id="mqDenim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db6d3"/><stop offset=".6" stop-color="#b1c6de"/><stop offset="1" stop-color="#8ea7c6"/></linearGradient>
+    <linearGradient id="mqGraf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#655e5c"/><stop offset="1" stop-color="#524c4a"/></linearGradient>
+    <!-- python: fine scales + irregular dark blotches, layered -->
+    <pattern id="mqPy" width="12" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <rect width="12" height="9" fill="#d3cab9"/>
+      <path d="M0 4.5Q3 0 6 4.5T12 4.5M-6 9Q-3 4.5 0 9T6 9T12 9M-6 0Q-3-4.5 0 0T6 0T12 0" stroke="#7a7063" stroke-width=".9" fill="none"/>
+    </pattern>
+    <pattern id="mqPyBlot" width="46" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+      <path d="M3 6c6-5 16-4 18 1 2 6-6 9-12 8S-1 10 3 6zM26 22c7-3 15-1 16 4 0 6-8 8-13 7s-7-8-3-11zM8 30c4-2 9 0 9 3s-5 5-8 4-4-5-1-7z" fill="#3f3831" opacity=".85"/>
+      <path d="M7 8c4-2 8-1 9 1s-3 4-6 3-5-2-3-4zM30 24c4-2 8 0 8 2s-4 3-6 3-4-3-2-5z" fill="#a39888"/>
+    </pattern>
+    <linearGradient id="mqBoot" gradientUnits="userSpaceOnUse" x1="150" y1="0" x2="250" y2="0"><stop offset="0" stop-color="#050505"/><stop offset=".3" stop-color="#2a2828"/><stop offset=".5" stop-color="#0c0b0b"/><stop offset=".72" stop-color="#2a2828"/><stop offset="1" stop-color="#050505"/></linearGradient>
+    <filter id="mqSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+
+    <!-- body: same pose in every look -->
+    <g id="mqBody">
+      <ellipse cx="200" cy="972" rx="120" ry="12" fill="#000" opacity=".55" filter="url(#mqSoft)"/>
+      <circle cx="200" cy="42" r="19" fill="url(#mqHair)"/>
+      <path d="M187 118h26v58h-26z" fill="url(#mqSkin)"/>
+      <path d="M200 48c26 0 36 22 35 46s-17 44-35 44-34-20-35-44 9-46 35-46z" fill="url(#mqHead)"/>
+      <path d="M166 90c-2-30 16-46 34-46s37 14 34 46c-6-20-20-28-34-28s-28 8-34 28z" fill="url(#mqHair)"/>
+      <path d="M186 168c-10 10-36 12-52 20-10 6-12 26-6 48 6 44 32 84 38 120 4 36-20 64-20 106 0 58 6 138 14 228 4 40-2 110 6 170 4 30 6 50 6 70 0 15-12 28-8 36 6 6 26 4 26-6 0-15-4-35-4-55 2-55 8-115 6-175-2-30 2-90 6-140 2-50 4-75 4-82 1 7 2 32 4 82 4 50 8 110 6 140-2 60 4 120 6 175 0 20-4 40-4 55 0 10 20 12 26 6 4-8-8-21-8-36 0-20 2-40 6-70 8-60 2-130 6-170 8-90 14-170 14-228 0-42-24-70-20-106 6-36 32-76 38-120 6-22 4-42-6-48-16-8-42-10-52-20z" fill="url(#mqSkin)"/>
+      <path d="M134 188c-14 6-22 24-22 52 0 50-4 90-2 130 0 50 4 100 6 135 0 15-6 35-4 51 2 14 16 18 20 4 2-14-2-35 0-55 2-35 0-85 0-125 0-50 4-100 4-140z" fill="url(#mqSkin)"/>
+      <path d="M266 188c14 6 22 24 22 52 0 50 4 90 2 130 0 50-4 100-6 135 0 15 6 35 4 51-2 14-16 18-20 4-2-14 2-35 0-55-2-35 0-85 0-125 0-50-4-100-4-140z" fill="url(#mqSkin)"/>
+    </g>
+
+    <!-- 1 · risca de giz: blazer cropped + pantalona com cordão -->
+    <path id="mqSleeves" d="M122 186c-14 8-20 28-20 58 0 56-2 106 0 146 2 50 4 90 6 122h28c0-32 2-72 2-122 0-50 2-100 2-150zM278 186c14 8 20 28 20 58 0 56 2 106 0 146-2 50-4 90-6 122h-28c0-32-2-72-2-122 0-50-2-100-2-150z"/>
+    <path id="mqWide" d="M158 392c-8 38-16 78-20 128-6 120-14 280-20 432h78c0-132 2-312 4-412 2 100 4 280 4 412h78c-6-152-14-312-20-432-4-50-12-90-20-128-22 6-62 6-84 0z"/>
+    <g id="lkRisca">
+      <ellipse cx="170" cy="960" rx="22" ry="7" fill="#0d0c0c"/><ellipse cx="230" cy="960" rx="22" ry="7" fill="#0d0c0c"/>
+      <use href="#mqWide" fill="url(#mqPin)"/><use href="#mqWide" fill="url(#mqShade)"/>
+      <path d="M175 402l-8 160M225 402l8 160M200 540v412" stroke="#000" stroke-opacity=".28" stroke-width="1.4" fill="none"/>
+      <path d="M158 392c22 6 62 6 84 0M160 402c22 6 58 6 80 0" stroke="#2b2d33" stroke-width="1.6" fill="none"/>
+      <path d="M118 952h78M204 952h78" stroke="#ebe7de" stroke-width="3"/>
+      <path d="M200 404c-12-8-22-2-14 6 4 4 10-2 14-6 4 4 10 10 14 6 8-8-2-14-14-6zM200 404l-8 38M200 404l6 34" stroke="#f4f1ea" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <use href="#mqSleeves" fill="url(#mqPin)"/><use href="#mqSleeves" fill="url(#mqShade)"/>
+      <path d="M184 164c-14 8-44 12-62 22-6 14-2 44 4 64 4 30 6 60 8 84 26 6 106 6 132 0 2-24 4-54 8-84 6-20 10-50 4-64-18-10-48-14-62-22l-8 6-8 122-8-122z" fill="url(#mqPin)"/>
+      <path d="M184 164c-14 8-44 12-62 22-6 14-2 44 4 64 4 30 6 60 8 84 26 6 106 6 132 0 2-24 4-54 8-84 6-20 10-50 4-64-18-10-48-14-62-22l-8 6-8 122-8-122z" fill="url(#mqShade)"/>
+      <path d="M192 172l-16 58 22 58M208 172l16 58-22 58M216 238l30-4v8l-29 4z" stroke="#25272c" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+      <path d="M134 334c26 6 106 6 132 0" stroke="#ebe7de" stroke-width="2.6" fill="none"/>
+      <circle cx="200" cy="304" r="3.2" fill="#1b1c20"/>
+      <path d="M185 172c5 22 25 22 30 0" stroke="#d2ad74" stroke-width="6.5" fill="none" stroke-dasharray="5 2.2" stroke-linecap="round"/>
+    </g>
+
+    <!-- 2 · denim: jaqueta cropped off-white + jeans wide leg -->
+    <path id="mqJeans" d="M162 372c-10 48-18 98-22 148-6 120-14 280-20 432h76c0-132 2-312 4-412 2 100 4 280 4 412h76c-6-152-14-312-20-432-4-50-12-100-22-148-18 6-58 6-76 0z"/>
+    <path id="mqJacket" d="M184 162c-16 10-42 14-60 24-6 14-2 44 4 64 4 30 6 62 8 92h128c2-30 4-62 8-92 6-20 10-50 4-64-18-10-44-14-60-24l-16 24z"/>
+    <g id="lkDenim">
+      <ellipse cx="170" cy="960" rx="22" ry="7" fill="#f2f0ea"/><ellipse cx="230" cy="960" rx="22" ry="7" fill="#f2f0ea"/>
+      <use href="#mqJeans" fill="url(#mqDenim)"/><use href="#mqJeans" fill="url(#mqShade)"/>
+      <path d="M162 380c18 6 58 6 76 0M162 392c18 6 58 6 76 0" stroke="#6f8cb0" stroke-width="1.6" fill="none"/>
+      <path d="M200 398c0 34-2 62-4 84M152 440l-28 510M248 440l28 510M166 396c6 18 14 28 22 30M234 396c-6 18-14 28-22 30" stroke="#fff" stroke-opacity=".35" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+      <circle cx="200" cy="378" r="2.8" fill="#b07a4a"/><circle cx="200" cy="391" r="2.8" fill="#b07a4a"/>
+      <use href="#mqSleeves" fill="url(#mqOff)"/><use href="#mqSleeves" fill="url(#mqShade)"/>
+      <path d="M108 494h28M264 494h28" stroke="#cfc4b1" stroke-width="2"/>
+      <use href="#mqJacket" fill="url(#mqOff)"/><use href="#mqJacket" fill="url(#mqShade)"/>
+      <path d="M184 162l-12 26 26 8 2-10zM216 162l12 26-26 8-2-10z" fill="#f7f1e7" stroke="#c9bda9" stroke-width="1.2"/>
+      <path d="M200 192v150M150 232h38v30h-38zM212 232h38v30h-38zM150 244h38M212 244h38" stroke="#000" stroke-opacity=".16" stroke-width="1.3" fill="none"/>
+      <path d="M136 344h128" stroke="#efe7d8" stroke-width="6" stroke-dasharray="1.5 2.5"/>
+      <g fill="#c9c9c9"><circle cx="204" cy="214" r="2.6"/><circle cx="204" cy="254" r="2.6"/><circle cx="204" cy="294" r="2.6"/><circle cx="204" cy="330" r="2.6"/></g>
+    </g>
+
+    <!-- 3 · macacão pantalona grafite com decote V -->
+    <path id="mqJump" d="M178 164C164 168 142 176 134 190C128 210 128 232 130 250C136 292 156 330 164 360C160 400 146 440 142 490C134 620 126 800 120 952L196 952C196 820 198 660 200 560C202 660 204 820 204 952L280 952C274 800 266 620 258 490C254 440 240 400 236 360C244 330 264 292 270 250C272 232 272 210 266 190C258 176 236 168 222 164L200 262Z"/>
+    <g id="lkGrafite">
+      <ellipse cx="170" cy="960" rx="22" ry="7" fill="#0d0c0c"/><ellipse cx="230" cy="960" rx="22" ry="7" fill="#0d0c0c"/>
+      <use href="#mqJump" fill="url(#mqGraf)"/><use href="#mqJump" fill="url(#mqShade)"/><use href="#mqJump" fill="url(#mqFold)"/>
+      <path d="M168 382l-8 150M232 382l8 150" stroke="#3e3937" stroke-width="1.6" fill="none"/>
+      <path d="M200 262v298M176 440l-10 510M224 440l10 510" stroke="#000" stroke-opacity=".25" stroke-width="1.4" fill="none"/>
+      <path d="M186 170c6 13 22 13 28 0" stroke="#d2ad74" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- 4 · noite: blusa chiffon com mangas bufantes + saia python + bota -->
+    <path id="mqPuff" d="M126 186c-26 10-36 54-34 114 0 60 2 120 8 180 0 20 4 30 10 34h28c2-14 2-34 2-54 2-60 4-130 2-210zM274 186c26 10 36 54 34 114 0 60-2 120-8 180 0 20-4 30-10 34h-28c-2-14-2-34-2-54-2-60-4-130-2-210z"/>
+    <path id="mqSkirt" d="M160 368c-6 32-14 72-16 102-2 20-4 35-6 52h124c-2-17-4-32-6-52-2-30-10-70-16-102z"/>
+    <g id="lkNoite">
+      <path d="M156 690c2 70 6 150 10 210 2 30 0 48-6 60 10 12 32 10 32-2-2-28-4-58-2-98 4-60 6-120 6-170zM244 690c-2 70-6 150-10 210-2 30 0 48 6 60-10 12-32 10-32-2 2-28 4-58 2-98-4-60-6-120-6-170z" fill="url(#mqBoot)"/>
+      <path d="M166 700c2 60 4 130 8 190M234 700c-2 60-4 130-8 190" stroke="#fff" stroke-opacity=".14" stroke-width="2" fill="none"/>
+      <use href="#mqSkirt" fill="url(#mqPy)"/><use href="#mqSkirt" fill="url(#mqPyBlot)"/><use href="#mqSkirt" fill="url(#mqShade)"/>
+      <use href="#mqPuff" fill="#141114" opacity=".72"/><use href="#mqPuff" fill="url(#mqShade)" opacity=".6"/>
+      <ellipse cx="122" cy="514" rx="20" ry="8" fill="#141114"/><ellipse cx="278" cy="514" rx="20" ry="8" fill="#141114"/>
+      <path d="M110 488h26v10h-26zM264 488h26v10h-26z" fill="#d2ad74"/>
+      <path d="M184 164c-16 8-42 12-58 22-6 14-2 44 4 66 6 38 20 78 32 120h76c12-42 26-82 32-120 6-22 10-52 4-66-16-10-42-14-58-22-6 8-26 8-32 0z" fill="#161316"/>
+      <path d="M184 164c-16 8-42 12-58 22-6 14-2 44 4 66 6 38 20 78 32 120h76c12-42 26-82 32-120 6-22 10-52 4-66-16-10-42-14-58-22-6 8-26 8-32 0z" fill="url(#mqShade)"/>
+      <path d="M136 206c14 16 24 0 36 16 12-16 24 2 36-10 12 16 24 0 36 14 10-12 18 6 24-4l-6 24c-12-10-22 4-34-8-12 14-24 0-36 10-12-14-24 2-36-12-10 12-18-2-24 4z" fill="#221e22"/>
+      <path d="M214 170c8 4 14 12 10 22-2 8-10 4-8-4M214 170c-4 10-2 22 6 28" stroke="#221e22" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M190 172c4 8 16 8 20 0" stroke="#d2ad74" stroke-width="1.8" fill="none"/>
+    </g>
+  </defs>
+</svg>
 
 <div class="curtain" aria-hidden="true">
   <div class="p p1"></div>
@@ -467,9 +521,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
 </div>
 <div class="progress" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
-<div class="cursor-glow" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"><i></i></div>
-<div class="cursor-dot" aria-hidden="true"></div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -478,7 +529,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       <a href="#colecao" data-go>Coleção</a>
       <a href="#novidades" data-go>Novidades</a>
       <a href="#lookbook" data-go>Lookbook</a>
-      <a href="#galeria" data-go>Galeria</a>
       <a href="#sobre" data-go>Sobre</a>
       <a href="#visite" data-go>Visite</a>
     </nav>
@@ -491,7 +541,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     <a href="#colecao" data-go>Coleção</a>
     <a href="#novidades" data-go>Novidades</a>
     <a href="#lookbook" data-go>Lookbook</a>
-      <a href="#galeria" data-go>Galeria</a>
     <a href="#sobre" data-go>Sobre</a>
     <a href="#visite" data-go>Visite</a>
   </nav>
@@ -598,16 +647,16 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     </div>
 
     <div class="cats" data-stagger>
-      <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
+      <a class="cat rv" href="#novidades" data-go>
         <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/python-corpo.jpg" alt="" loading="lazy" style="--pos:45% 30%"></div><div class="cat-info"><h3>Saias &amp; Blusas</h3><span>Ver peças</span></div></div>
       </a>
-      <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
+      <a class="cat rv" href="#novidades" data-go>
         <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/blazer-cinza-frente.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Conjuntos</h3><span>Ver peças</span></div></div>
       </a>
-      <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
+      <a class="cat rv" href="#novidades" data-go>
         <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/macacao-frente.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Macacões</h3><span>Ver peças</span></div></div>
       </a>
-      <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
+      <a class="cat rv" href="#novidades" data-go>
         <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/jaqueta-cropped-corpo.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Jaquetas</h3><span>Ver peças</span></div></div>
       </a>
     </div>
@@ -625,29 +674,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       <a class="link-arrow rv" href="https://instagram.com/dmadame5" target="_blank" rel="noopener">Ver tudo no Instagram <svg><use href="#i-arrow"/></svg></a>
     </div>
     <div class="prods" data-stagger id="prods"></div>
-  </div>
-</section>
-
-<!-- EDITORIAL -->
-<section class="sec editorial">
-  <div class="wrap ed-grid">
-    <div class="ed-stage" role="img" aria-label="Conjunto risca de giz e blazer cinza da D'Madame">
-      <div class="ring pl" data-speed="-.06" aria-hidden="true"></div>
-      <div class="pl pl1" data-speed=".10" data-rot="-2"><div class="media clip sweep"><img class="ph" src="assets/fotos/risca-giz-close.jpg" alt="" loading="lazy" style="--pos:50% 18%"></div></div>
-      <div class="pl pl2" data-speed="-.14" data-rot="3"><div class="media clip" style="--d:200ms"><img class="ph" src="assets/fotos/risca-giz-pose.jpg" alt="" loading="lazy" style="--pos:70% 30%"></div></div>
-      <div class="pl pl3" data-speed=".22" data-rot="-3"><div class="media clip" style="--d:400ms"><img class="ph" src="assets/fotos/blazer-cinza-costas.jpg" alt="" loading="lazy" style="--pos:50% 30%"></div></div>
-    </div>
-    <div class="ed-copy">
-      <p class="eyebrow rv">Alfaiataria urbana</p>
-      <h2 data-split>Poder. <em>Elegância.</em><br>Atitude.</h2>
-      <p class="rv" style="margin-top:26px">Risca de giz, cortes cropped e cintura marcada: alfaiataria com atitude para quem vive a cidade sem abrir mão do conforto.</p>
-      <ul class="ed-list" data-stagger>
-        <li class="rv">Blazer cropped <span>risca de giz</span></li>
-        <li class="rv">Pantalona com cordão <span>caimento amplo</span></li>
-        <li class="rv">Conjunto cinza <span>blazer + saia envelope</span></li>
-      </ul>
-      <a class="btn btn-wine magnetic rv" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl">Quero esse estilo <svg><use href="#i-arrow"/></svg></span></a>
-    </div>
   </div>
 </section>
 
@@ -714,40 +740,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     </div>
   </div>
 </section>
-
-<!-- GALLERY -->
-<section class="sec" id="galeria">
-  <div class="wrap">
-    <div class="sec-head">
-      <div><p class="eyebrow rv">Galeria</p><h2 data-split>Mais looks da <em>D'Madame</em></h2></div>
-      <p class="lead rv">Toque em uma foto para ver de perto.</p>
-    </div>
-    <div class="gallery" id="gallery">
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-corpo.jpg" width="1430" height="1748" alt="Conjunto risca de giz: blazer cropped e pantalona" loading="lazy"><span class="cap">Risca de giz</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-corpo.jpg" width="1170" height="1170" alt="Blusa chiffon e saia python com bota preta" loading="lazy"><span class="cap">Preto &amp; python</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/camiseta-coelho.jpg" width="1440" height="1800" alt="Camiseta oversized preta com estampa de coelho" loading="lazy"><span class="cap">Camiseta coelho</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-cropped-corpo.jpg" width="1108" height="1364" alt="Jaqueta cropped off-white com jeans wide leg" loading="lazy"><span class="cap">Jaqueta cropped</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/macacao-frente.jpg" width="1333" height="1666" alt="Macacão pantalona grafite com decote V" loading="lazy"><span class="cap">Macacão grafite</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/blazer-cinza-frente.jpg" width="1065" height="1331" alt="Conjunto blazer cropped e saia envelope cinza" loading="lazy"><span class="cap">Blazer &amp; saia cinza</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-pose.jpg" width="1440" height="1800" alt="Blazer risca de giz com colar dourado" loading="lazy"><span class="cap">Detalhes dourados</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-costas.jpg" width="1170" height="1170" alt="Blusa chiffon preta e saia python vistas de costas" loading="lazy"><span class="cap">Python, costas</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-cropped-close.jpg" width="1073" height="1073" alt="Jaqueta cropped off-white com bolsa" loading="lazy"><span class="cap">Off-white</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/camiseta-stay-cool.jpg" width="984" height="984" alt="Camiseta Stay Cool vista de costas" loading="lazy"><span class="cap">Stay cool</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-close.jpg" width="1425" height="1735" alt="Blazer cropped risca de giz com cordão branco" loading="lazy"><span class="cap">Cropped</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/macacao-costas.jpg" width="1333" height="1666" alt="Macacão grafite com zíper dourado nas costas" loading="lazy"><span class="cap">Zíper dourado</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-coracoes.jpg" width="1170" height="1170" alt="Costas da jaqueta com corações de tachas" loading="lazy"><span class="cap">Corações</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-frente.jpg" width="1170" height="1170" alt="Blusa com babados e saia python" loading="lazy"><span class="cap">Babados</span></button>
-      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/blazer-cinza-costas.jpg" width="665" height="665" alt="Conjunto blazer e short cinza visto de costas" loading="lazy"><span class="cap">Alfaiataria cinza</span></button>
-    </div>
-  </div>
-</section>
-
-<dialog class="lb" id="lb" aria-label="Foto ampliada">
-  <figure><img id="lbImg" src="" alt=""><figcaption><span id="lbCap"></span><small id="lbNum"></small></figcaption></figure>
-  <button class="lb-btn lb-close" aria-label="Fechar"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
-  <button class="lb-btn lb-prev" aria-label="Foto anterior"><svg><use href="#i-arrow"/></svg></button>
-  <button class="lb-btn lb-next" aria-label="Próxima foto"><svg><use href="#i-arrow"/></svg></button>
-</dialog>
 
 <!-- MANIFESTO -->
 <section class="manifesto" id="sobre">
@@ -833,7 +825,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     : `<img class="ph ${cls}" src="assets/fotos/${p}.jpg" alt="${alt}" loading="lazy" style="--pos:50% 15%">`;
   $('#prods').innerHTML = products.map(([p1, p2, name, desc, cols, tag]) => `
     <article class="prod rv">
-      <div class="prod-media tilt gb spot" data-cursor="Ver">
+      <div class="prod-media tilt gb spot">
         <div class="media">${photo(p1, name)}${photo(p2, '', 'alt')}</div>
         <span class="tag glass">${tag}</span>
         <button class="fav glass" aria-pressed="false" aria-label="Favoritar ${name}"><svg><use href="#i-heart"/></svg></button>
@@ -843,52 +835,21 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     </article>`).join('');
   $$('.fav').forEach(b => b.addEventListener('click', e => { e.preventDefault(); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); }));
 
-  /* ---------- gallery lightbox ---------- */
-  const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'), lbNum = $('#lbNum');
-  const gItems = $$('.g-item');
-  let lbIdx = 0;
-  function showPhoto(i, animate) {
-    lbIdx = (i + gItems.length) % gItems.length;
-    const img = $('img', gItems[lbIdx]);
-    const apply = () => {
-      lbImg.src = img.src; lbImg.alt = img.alt;
-      lbCap.textContent = $('.cap', gItems[lbIdx]).textContent;
-      lbNum.textContent = `${String(lbIdx + 1).padStart(2, '0')} / ${gItems.length}`;
-    };
-    if (!animate || reduce) { apply(); return; }
-    lbImg.classList.add('swap');
-    setTimeout(() => { apply(); lbImg.decode().catch(() => {}).then(() => lbImg.classList.remove('swap')); }, 280);
-  }
-  gItems.forEach((g, i) => g.addEventListener('click', () => { showPhoto(i); lb.showModal(); lenis && lenis.stop(); }));
-  $('.lb-close').addEventListener('click', () => lb.close());
-  $('.lb-prev').addEventListener('click', () => showPhoto(lbIdx - 1, true));
-  $('.lb-next').addEventListener('click', () => showPhoto(lbIdx + 1, true));
-  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
-  lb.addEventListener('close', () => { lenis && lenis.start(); gItems[lbIdx].focus({ preventScroll: true }); });
-  lb.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') showPhoto(lbIdx + 1, true);
-    if (e.key === 'ArrowLeft') showPhoto(lbIdx - 1, true);
-  });
-  // swipe on touch screens
-  let tx = null;
-  lb.addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive: true });
-  lb.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) showPhoto(lbIdx + (dx < 0 ? 1 : -1), true); tx = null; });
-
   /* ---------- provador (outfit changes on the pinned model) ----------
-     For the real "same model" effect, replace `img` with photos of ONE model in the SAME pose,
-     camera, framing and light, changing only the outfit (see assets/provador/LEIA-ME.txt).
-     `pos` (object-position) and `sc` (scale) let you fine-tune alignment per photo. */
+     Each look uses the digital mannequin (`svg`: id of an outfit group in #mqBody's sprite).
+     To use photos instead, give a look `img` (+ optional `pos`) with pictures of ONE model in the
+     SAME pose, camera and light (see assets/provador/LEIA-ME.txt). */
   const FIT_LOOKS = [
-    { img: 'assets/fotos/risca-giz-corpo.jpg', pos: '50% 0%', sc: 1, col: 'Alfaiataria urbana', name: 'Risca de <em>giz</em>',
+    { svg: 'lkRisca', col: 'Coleção cidade', name: 'Risca de <em>giz</em>',
       desc: 'Blazer cropped e pantalona com cordão: o poder da alfaiataria com o conforto de um moletom.',
       pieces: [['Blazer cropped risca de giz', '#4b4f5c', 'Blazer'], ['Pantalona com cordão', '#4b4f5c', 'Calça']] },
-    { img: 'assets/fotos/jaqueta-cropped-corpo.jpg', pos: '50% 0%', sc: 1, col: 'Casual chic', name: 'Denim <em>off-white</em>',
+    { svg: 'lkDenim', col: 'Casual chic', name: 'Denim <em>off-white</em>',
       desc: 'Jaqueta cropped de sarja com barra desfiada e jeans wide leg de cintura dupla.',
       pieces: [['Jaqueta cropped off-white', '#eee6d8', 'Jaqueta'], ['Jeans wide leg', '#a9c1dc', 'Calça']] },
-    { img: 'assets/fotos/macacao-frente.jpg', pos: '50% 0%', sc: 1, col: 'Essenciais', name: 'Grafite <em>fluido</em>',
+    { svg: 'lkGrafite', col: 'Essenciais', name: 'Grafite <em>fluido</em>',
       desc: 'Macacão pantalona com decote V e bolsos laterais. Uma peça, look completo.',
       pieces: [['Macacão pantalona grafite', '#5e5857', 'Macacão']] },
-    { img: 'assets/fotos/python-corpo.jpg', pos: '50% 0%', sc: 1, col: 'Noite', name: 'Preto & <em>python</em>',
+    { svg: 'lkNoite', col: 'Noite', name: 'Preto & <em>python</em>',
       desc: 'Blusa de chiffon com mangas bufantes e saia curta estampa python para as noites especiais.',
       pieces: [['Blusa chiffon preta', '#111', 'Blusa'], ['Saia python', '#b9ae9c', 'Saia']] }
   ];
@@ -896,7 +857,9 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   fit.style.setProperty('--n', FIT_LOOKS.length);
   const fitFrame = $('#fitFrame'), fitLine = $('#fitLine');
   fitFrame.insertAdjacentHTML('afterbegin', FIT_LOOKS.map((l, i) =>
-    `<div class="fit-layer" style="--pos:${l.pos};--sc:${l.sc}"><img src="${l.img}" alt="Look ${i + 1}" ${i ? 'loading="lazy"' : ''}></div>`).join(''));
+    `<div class="fit-layer" style="--pos:${l.pos || '50% 10%'}">${l.img
+      ? `<img src="${l.img}" alt="Look ${i + 1}" ${i ? 'loading="lazy"' : ''}>`
+      : `<svg viewBox="-40 -12 480 1010" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Manequim vestindo o look ${i + 1}"><use href="#mqBody"/><use href="#${l.svg}"/></svg>`}</div>`).join(''));
   $('#fitInfo').innerHTML = FIT_LOOKS.map((l, i) => `
     <article class="fit-look${i ? '' : ' on'}" ${i ? 'aria-hidden="true"' : ''}>
       <div class="col">${l.col}</div>
@@ -945,9 +908,11 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   function startReveals() {
     if (revealStarted) return; revealStarted = true;
     const io = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.dataset.countEl !== undefined) {} }
+      if (e.isIntersecting) { (e.target._rv || e.target).classList.add('in'); io.unobserve(e.target); }
     }), { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
-    $$('.rv, .clip, [data-split]').forEach(el => io.observe(el));
+    $$('.rv, [data-split]').forEach(el => io.observe(el));
+    // clip-path hides .clip completely, so IntersectionObserver never sees it enter: watch the parent
+    $$('.clip').forEach(el => { el.parentElement._rv = el; io.observe(el.parentElement); });
     // counters
     const cio = new IntersectionObserver(es => es.forEach(e => {
       if (!e.isIntersecting) return; cio.unobserve(e.target);
@@ -995,24 +960,13 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
 
   /* ---------- pointer-driven effects ---------- */
   const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
-  const ring = { x: mouse.x, y: mouse.y }, glow = { x: mouse.x, y: mouse.y }, norm = { x: 0, y: 0 };
-  const dot = $('.cursor-dot'), ringEl = $('.cursor-ring'), ringI = $('.cursor-ring i'), glowEl = $('.cursor-glow');
+  const norm = { x: 0, y: 0 };
   const hero = $('.hero');
   const layers = $$('.hero .layer').map(el => ({ el, d: +el.dataset.depth || 0 }));
-  if (fine && !reduce) document.documentElement.classList.add('has-cursor');
 
   addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
 
   if (fine && !reduce) {
-    // cursor states
-    document.addEventListener('pointerover', e => {
-      const lab = e.target.closest('[data-cursor]');
-      const hov = e.target.closest('a, button');
-      ringEl.classList.toggle('label', !!lab);
-      ringEl.classList.toggle('hover', !lab && !!hov);
-      ringI.textContent = lab ? lab.dataset.cursor : '';
-    });
-
     // spotlight + border glow coordinates
     $$('.spot').forEach(el => el.addEventListener('pointermove', e => {
       const r = el.getBoundingClientRect();
@@ -1064,7 +1018,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   /* ---------- scroll-driven effects ---------- */
   const progress = $('.progress');
   const cssTimeline = CSS.supports('animation-timeline: scroll()');
-  const speedEls = $$('[data-speed]').map(el => ({ el, s: +el.dataset.speed, rot: +el.dataset.rot || 0, host: el.parentElement }));
   const wa = $('.wa-float');
   // lookbook chapters: the sticky frame for the chapter crossing mid-screen gets revealed
   const chaps = $$('.chap'), frames = $$('.frame'), chapNum = $('#chapNum'), chapBar = $('#chapBar'), chapsWrap = $('.chaps');
@@ -1099,12 +1052,14 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     fitSeg = reduce ? Math.round(target) : lerp(fitSeg, target, .14);
     if (Math.abs(fitSeg - target) < .0005) fitSeg = target;
     let line = null;
+    // k[i]: how far look i has dressed the mannequin during the scroll from look i-1 to look i
+    const k = fitLayers.map((l, i) => !i ? 1 : reduce ? (fitSeg >= i ? 1 : 0) : smooth(.2, .85, fitSeg - (i - 1)));
     fitLayers.forEach((l, i) => {
-      if (!i) return;
-      // layer i dresses the model during the scroll from look i-1 to look i
-      const k = reduce ? (fitSeg >= i ? 1 : 0) : smooth(.2, .85, fitSeg - (i - 1));
-      l.style.setProperty('--k', k.toFixed(4));
-      if (k > 0 && k < 1) line = k;
+      const a = k[i], b = k[i + 1] || 0;
+      l.style.setProperty('--a', a.toFixed(4));
+      l.style.setProperty('--b', b.toFixed(4));
+      l.style.visibility = a <= 0 || b >= 1 ? 'hidden' : '';
+      if (i && a > 0 && a < 1) line = a;
     });
     fitLine.style.setProperty('--ly', line === null ? '0%' : (line * 130 - 15).toFixed(2) + '%');
     fitLine.style.setProperty('--lo', line === null ? 0 : Math.sin(Math.PI * line).toFixed(3));
@@ -1138,13 +1093,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       chapBar.style.setProperty('--p', clamp((vh * .5 - cr.top) / cr.height, 0, 1).toFixed(3));
     }
     if (reduce) return;
-    // 3D parallax layers
-    speedEls.forEach(({ el, s, rot, host }) => {
-      const r = host.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > vh + 200) return;
-      const c = (r.top + r.height / 2 - vh / 2);
-      el.style.transform = `translate3d(0, ${(-c * s).toFixed(1)}px, 0) rotate(${(rot * c / vh).toFixed(2)}deg)`;
-    });
     // manifesto word-by-word
     const mr = man.getBoundingClientRect();
     if (mr.top < vh && mr.bottom > 0) {
@@ -1162,13 +1110,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     prevY = y;
     onScroll(y, vel);
 
-    if (fine && !reduce) {
-      dot.style.transform = `translate3d(${mouse.x}px,${mouse.y}px,0)`;
-      ring.x = lerp(ring.x, mouse.x, .16); ring.y = lerp(ring.y, mouse.y, .16);
-      ringEl.style.transform = `translate3d(${ring.x}px,${ring.y}px,0)`;
-      glow.x = lerp(glow.x, mouse.x, .06); glow.y = lerp(glow.y, mouse.y, .06);
-      glowEl.style.transform = `translate3d(${glow.x}px,${glow.y}px,0)`;
-    }
     if (!reduce && heroVisible) {
       norm.x = lerp(norm.x, mouse.x / innerWidth - .5, .05);
       norm.y = lerp(norm.y, mouse.y / innerHeight - .5, .05);
