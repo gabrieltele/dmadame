@@ -132,9 +132,6 @@ em.wi{font-style:italic;color:var(--gold)}
 /* skeleton shimmer while a photo loads */
 .media::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(241,231,216,.05) 50%,transparent 70%);background-size:220% 100%;animation:skel 1.6s linear infinite}
 @keyframes skel{from{background-position:120% 0}to{background-position:-120% 0}}
-/* sprites cropped from the Instagram grid screenshot (summer dresses) */
-.sp{background-image:var(--src);background-size:500% 200%;background-position:calc(var(--c)*25%) calc(var(--r)*100%)}
-.A{--src:url(assets/looks-a.webp)}
 .media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(12,10,9,.55));pointer-events:none}
 
 /* ---------- glass / spotlight / border glow ---------- */
@@ -242,8 +239,8 @@ em.wi{font-style:italic;color:var(--gold)}
 .prod .alt{opacity:0;transform:scale(1.12)}
 .prod:hover .alt{opacity:1;transform:scale(1.04)}
 .prod:hover .ph:not(.alt){transform:scale(1.08)}
-.tag{position:absolute;z-index:6;top:14px;left:14px;padding:6px 12px;border-radius:999px;font-size:9px;letter-spacing:.24em;text-transform:uppercase;transform:translateZ(30px)}
-.fav{position:absolute;z-index:6;top:10px;right:10px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:0;color:var(--cream);transform:translateZ(30px);transition:color .4s,background .4s}
+.tag{position:absolute;z-index:6;background:rgba(20,17,16,.62)!important;color:var(--cream);top:14px;left:14px;padding:6px 12px;border-radius:999px;font-size:9px;letter-spacing:.24em;text-transform:uppercase;transform:translateZ(30px)}
+.fav{position:absolute;z-index:6;background:rgba(20,17,16,.55)!important;top:10px;right:10px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:0;color:var(--cream);transform:translateZ(30px);transition:color .4s,background .4s}
 .fav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;transition:fill .4s,transform .6s var(--ease)}
 .fav[aria-pressed=true]{color:var(--wine)}
 .fav[aria-pressed=true] svg{fill:currentColor;transform:scale(1.15)}
@@ -810,21 +807,19 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   if (reduce) document.documentElement.classList.add('reduce');
 
   /* ---------- products ---------- */
-  // photo = file in assets/fotos, or [col,row] of the Instagram-grid sprite (summer dresses)
+  // [main photo, hover photo] from assets/fotos
   const products = [
+    ['renda-frente', 'renda-costas', 'Vestido Renda Off-White', 'Renda com babado · alças finas', ['#efe6d6'], 'Verão'],
+    ['floral-corpo', 'floral-close', 'Vestido Floral Rubi', 'Estampa floral · alças largas', ['#f3ece2', '#c3243b'], 'Verão'],
+    ['linho-frente', 'linho-costas', 'Vestido Linho Areia', 'Linho · decote franzido', ['#cdbb9f'], 'Verão'],
     ['risca-giz-corpo', 'risca-giz-close', 'Conjunto Risca de Giz', 'Blazer cropped + pantalona', ['#4b4f5c'], 'Novo'],
     ['python-corpo', 'python-costas', 'Blusa Chiffon & Saia Python', 'Mangas bufantes · saia curta', ['#111', '#b9ae9c'], 'Novo'],
     ['jaqueta-cropped-corpo', 'jaqueta-coracoes', 'Jaqueta Cropped Corações', 'Sarja com tachas douradas', ['#eee6d8'], 'Exclusiva'],
     ['macacao-frente', 'macacao-costas', 'Macacão Pantalona Grafite', 'Decote V · zíper dourado', ['#5e5857'], 'Favorito'],
     ['blazer-cinza-frente', 'blazer-cinza-costas', 'Conjunto Blazer & Saia Cinza', 'Alfaiataria · saia envelope', ['#8a8b8d'], 'Novo'],
-    ['camiseta-coelho', 'camiseta-stay-cool', 'Camiseta Oversized Stay Cool', 'Estampa frente e costas', ['#111', '#fff'], 'Street'],
-    [[2, 0], [4, 0], 'Vestido Renda Off-White', 'Renda · alças finas', ['#efe6d6'], 'Verão'],
-    [[0, 1], [1, 1], 'Vestido Floral Rubi', 'Linho estampado', ['#f3ece2', '#c3243b'], 'Verão'],
-    [[3, 1], [4, 1], 'Vestido Linho Areia', 'Alças de amarrar', ['#cdbb9f'], 'Verão']
+    ['camiseta-coelho', 'camiseta-stay-cool', 'Camiseta Oversized Stay Cool', 'Estampa frente e costas', ['#111', '#fff'], 'Street']
   ];
-  const photo = (p, alt, cls = '') => Array.isArray(p)
-    ? `<div class="ph sp A ${cls}" style="--c:${p[0]};--r:${p[1]}" role="img" aria-label="${alt}"></div>`
-    : `<img class="ph ${cls}" src="assets/fotos/${p}.jpg" alt="${alt}" loading="lazy" style="--pos:50% 15%">`;
+  const photo = (p, alt, cls = '') => `<img class="ph ${cls}" src="assets/fotos/${p}.jpg" alt="${alt}" loading="lazy" style="--pos:50% 15%">`;
   $('#prods').innerHTML = products.map(([p1, p2, name, desc, cols, tag]) => `
     <article class="prod rv">
       <div class="prod-media tilt gb spot">
