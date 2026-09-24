@@ -90,7 +90,7 @@ a{color:inherit;text-decoration:none}
 .nav-open .mobile-menu{opacity:1;visibility:visible}
 .mobile-menu a{font-family:var(--serif);font-size:44px;line-height:1.2;transform:translateY(30px);opacity:0;transition:transform .8s var(--ease),opacity .8s var(--ease)}
 .nav-open .mobile-menu a{transform:none;opacity:1}
-.mobile-menu a:nth-child(2){transition-delay:.05s}.mobile-menu a:nth-child(3){transition-delay:.1s}.mobile-menu a:nth-child(4){transition-delay:.15s}.mobile-menu a:nth-child(5){transition-delay:.2s}
+.mobile-menu a:nth-child(2){transition-delay:.05s}.mobile-menu a:nth-child(3){transition-delay:.1s}.mobile-menu a:nth-child(4){transition-delay:.15s}.mobile-menu a:nth-child(5){transition-delay:.2s}.mobile-menu a:nth-child(6){transition-delay:.25s}
 
 /* ---------- buttons ---------- */
 .btn{position:relative;display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 28px;border-radius:999px;font:500 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;border:0;overflow:hidden;isolation:isolate;transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
@@ -138,10 +138,15 @@ em.wi{font-style:italic;color:var(--gold)}
 .js .clip.in{clip-path:inset(0 0 0 0 round var(--cr,var(--r)))}
 .js .clip.in .ph{transform:scale(1.04)}
 
-/* ---------- photo sprites (cropped from the Instagram grid) ---------- */
+/* ---------- photos ---------- */
 .media{position:relative;overflow:hidden;border-radius:var(--r);background:var(--bg3);aspect-ratio:3/4}
-.ph{position:absolute;inset:0;background-image:var(--src);background-size:500% 200%;background-position:calc(var(--c)*25%) calc(var(--r)*100%);transform:scale(1.04);transition:transform 1.4s var(--ease),opacity .9s var(--ease)}
-.A{--src:url(assets/looks-a.webp)} .B{--src:url(assets/looks-b.webp)}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 22%);transform:scale(1.04);transition:transform 1.4s var(--ease),opacity .9s var(--ease)}
+/* skeleton shimmer while a photo loads */
+.media::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(241,231,216,.05) 50%,transparent 70%);background-size:220% 100%;animation:skel 1.6s linear infinite}
+@keyframes skel{from{background-position:120% 0}to{background-position:-120% 0}}
+/* sprites cropped from the Instagram grid screenshot (summer dresses) */
+.sp{background-image:var(--src);background-size:500% 200%;background-position:calc(var(--c)*25%) calc(var(--r)*100%)}
+.A{--src:url(assets/looks-a.webp)}
 .media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(12,10,9,.55));pointer-events:none}
 
 /* ---------- glass / spotlight / border glow ---------- */
@@ -244,7 +249,7 @@ em.wi{font-style:italic;color:var(--gold)}
 
 /* products */
 .prods{display:grid;gap:28px 16px;grid-template-columns:repeat(2,1fr)}
-@media(min-width:960px){.prods{grid-template-columns:repeat(4,1fr);gap:44px 22px}}
+@media(min-width:960px){.prods{grid-template-columns:repeat(3,1fr);gap:56px 26px}}
 .prod-media{position:relative;border-radius:var(--r)}
 .prod .alt{opacity:0;transform:scale(1.12)}
 .prod:hover .alt{opacity:1;transform:scale(1.04)}
@@ -281,22 +286,65 @@ em.wi{font-style:italic;color:var(--gold)}
 .ed-list li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px}
 .ed-list li span{color:var(--muted)}
 
-/* horizontal lookbook */
-.hs{position:relative}
-.hs-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:40px}
-.hs-track{display:flex;gap:20px;padding-left:max(16px,calc((100vw - 1240px)/2));will-change:transform}
-.look{flex:none;width:clamp(220px,24vw,320px);transform-origin:center}
-.look:nth-child(even){margin-top:70px}
-.look .media{aspect-ratio:3/4}
-.look figcaption{display:flex;justify-content:space-between;padding-top:12px;font-size:12px;color:var(--muted);letter-spacing:.06em}
-.look figcaption b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:18px;color:var(--cream)}
-.hs-end{flex:none;width:clamp(260px,30vw,380px);display:flex;flex-direction:column;justify-content:center;gap:24px;padding-right:40px}
-.hs-end h3{font-size:clamp(34px,3.6vw,52px)}
-.hs-count{font-family:var(--serif);font-size:14px;color:var(--muted);letter-spacing:.2em}
-.no-hs .hs{height:auto!important}
-.no-hs .hs-pin{position:relative;height:auto;padding:100px 0}
-.no-hs .hs-track{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:20px;transform:none!important}
-.no-hs .look{scroll-snap-align:start}
+/* lookbook chapters: sticky stacked frames swapped by scroll */
+.chap-grid{display:grid;gap:40px}
+@media(min-width:960px){.chap-grid{grid-template-columns:1fr 1fr;gap:80px}}
+.chap-stage{display:none}
+@media(min-width:960px){
+  .chap-stage{display:block;position:sticky;top:0;height:100vh;height:100svh;padding:12vh 0}
+  .chap-frames{position:relative;height:100%;perspective:1400px}
+  .frame{position:absolute;inset:0;border-radius:28px 28px 28px 200px;overflow:hidden;clip-path:inset(100% 0 0 0 round 28px 28px 28px 200px);transition:clip-path 1.5s var(--ease-io),transform 1.5s var(--ease),filter 1.5s var(--ease);box-shadow:0 50px 100px -40px rgba(0,0,0,.9)}
+  .frame img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 20%);transform:scale(1.25);transition:transform 2.2s var(--ease)}
+  .frame.on{clip-path:inset(0 0 0 0 round 28px 28px 28px 200px)}
+  .frame.on img{transform:scale(1.02)}
+  .frame.past{clip-path:inset(0 0 0 0 round 28px 28px 28px 200px);transform:scale(.92) translateY(-3%);filter:brightness(.45) blur(2px)}
+  .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(12,10,9,.5))}
+  .chap-num{position:absolute;z-index:5;right:-26px;top:10%;font-family:var(--serif);font-size:15px;letter-spacing:.3em;writing-mode:vertical-rl;color:var(--muted)}
+  .chap-num b{color:var(--gold);font-weight:500}
+  .chap-bar{position:absolute;z-index:5;left:24px;right:24px;bottom:24px;height:2px;border-radius:2px;background:rgba(241,231,216,.18);overflow:hidden}
+  .chap-bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--wine),var(--gold));transform-origin:0 50%;transform:scaleX(var(--p,0))}
+}
+.chap{min-height:auto;display:flex;flex-direction:column;justify-content:center;padding:20px 0 60px}
+@media(min-width:960px){.chap{min-height:100vh;padding:0}}
+.chap .mimg{margin-bottom:28px;border-radius:24px 24px 24px 120px}
+@media(min-width:960px){.chap .mimg{display:none}}
+.chap .idx{font-family:var(--serif);font-size:clamp(80px,9vw,140px);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(210,173,116,.45);margin-bottom:18px}
+.chap h3{font-size:clamp(38px,4.4vw,64px);margin-bottom:18px}
+.chap h3 em{font-style:italic;color:var(--gold)}
+.chap p{color:var(--muted);font-weight:300;max-width:42ch;margin:0 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.chips span{padding:8px 14px;border-radius:999px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);color:var(--cream);background:rgba(241,231,216,.03)}
+.chap-in{opacity:.25;transform:translateX(0);filter:blur(3px);transition:opacity 1s var(--ease),filter 1s var(--ease)}
+.chap.on .chap-in{opacity:1;filter:none}
+@media(max-width:959px){.chap-in{opacity:1;filter:none}}
+
+/* gallery (masonry + lightbox) */
+.gallery{columns:2;column-gap:12px}
+@media(min-width:768px){.gallery{columns:3;column-gap:16px}}
+@media(min-width:1200px){.gallery{columns:4}}
+.g-item{position:relative;display:block;width:100%;margin:0 0 12px;padding:0;border:0;background:var(--bg3);border-radius:18px;overflow:hidden;break-inside:avoid;color:inherit}
+@media(min-width:768px){.g-item{margin-bottom:16px}}
+.g-item img{width:100%;height:auto;display:block;transform:scale(1.02);transition:transform 1.4s var(--ease),filter 1s var(--ease)}
+.g-item:hover img{transform:scale(1.09)}
+.g-item .cap{position:absolute;z-index:4;left:0;right:0;bottom:0;padding:40px 16px 14px;text-align:left;font-family:var(--serif);font-style:italic;font-size:18px;background:linear-gradient(transparent,rgba(12,10,9,.75));transform:translateY(12px);opacity:0;transition:transform .7s var(--ease),opacity .7s var(--ease)}
+.g-item:hover .cap,.g-item:focus-visible .cap{transform:none;opacity:1}
+@media(hover:none){.g-item .cap{opacity:1;transform:none;font-size:15px}}
+.lb{position:fixed;inset:0;z-index:180;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(8,7,6,.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);color:var(--cream);opacity:0;transition:opacity .6s var(--ease),display .6s allow-discrete,overlay .6s allow-discrete}
+.lb[open]{display:grid;place-items:center;opacity:1}
+@starting-style{.lb[open]{opacity:0}}
+.lb::backdrop{background:transparent}
+.lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.lb img{max-width:min(92vw,900px);max-height:80vh;border-radius:20px;box-shadow:0 40px 120px -30px #000;transition:opacity .45s var(--ease),transform .7s var(--ease),filter .6s var(--ease)}
+.lb img.swap{opacity:0;transform:scale(.96);filter:blur(10px)}
+.lb figcaption{font-family:var(--serif);font-style:italic;font-size:22px}
+.lb figcaption small{font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.24em;color:var(--muted);margin-left:12px}
+.lb-btn{position:absolute;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:var(--cream);border:1px solid var(--line);background:rgba(241,231,216,.05);backdrop-filter:blur(10px);transition:background .4s,border-color .4s}
+.lb-btn:hover{background:rgba(210,173,116,.15);border-color:rgba(210,173,116,.5)}
+.lb-btn svg{width:18px;height:18px}
+.lb-close{top:20px;right:20px}
+.lb-prev{left:20px;top:50%;margin-top:-27px}.lb-prev svg{transform:rotate(180deg)}
+.lb-next{right:20px;top:50%;margin-top:-27px}
+@media(max-width:700px){.lb-prev,.lb-next{top:auto;bottom:24px;margin:0}.lb-prev{left:calc(50% - 64px)}.lb-next{right:calc(50% - 64px)}}
 
 /* manifesto (scroll-driven words) */
 .manifesto{padding:clamp(120px,16vw,220px) 0;text-align:center}
@@ -368,6 +416,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       <a href="#colecao" data-go>Coleção</a>
       <a href="#novidades" data-go>Novidades</a>
       <a href="#lookbook" data-go>Lookbook</a>
+      <a href="#galeria" data-go>Galeria</a>
       <a href="#sobre" data-go>Sobre</a>
       <a href="#visite" data-go>Visite</a>
     </nav>
@@ -380,6 +429,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     <a href="#colecao" data-go>Coleção</a>
     <a href="#novidades" data-go>Novidades</a>
     <a href="#lookbook" data-go>Lookbook</a>
+      <a href="#galeria" data-go>Galeria</a>
     <a href="#sobre" data-go>Sobre</a>
     <a href="#visite" data-go>Visite</a>
   </nav>
@@ -410,18 +460,18 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       </div>
     </div>
 
-    <div class="hero-visual" aria-label="Modelo usando vestido de renda off-white da D'Madame" role="img">
+    <div class="hero-visual" aria-label="Modelo usando conjunto risca de giz da D'Madame" role="img">
       <div class="layer" data-depth="-18" style="inset:0"><div class="morph"></div></div>
       <div class="layer arch-wrap" data-depth="10">
-        <div class="arch clip sweep" style="--d:300ms"><div class="media"><div class="ph A" style="--c:3;--r:0"></div></div></div>
+        <div class="arch clip sweep" style="--d:300ms"><div class="media"><img class="ph" src="assets/fotos/risca-giz-corpo.jpg" alt="" fetchpriority="high" style="--pos:50% 8%"></div></div>
       </div>
       <div class="layer ring-text" data-depth="26" aria-hidden="true">
         <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text><textPath href="#circ">D'Madame · com amor · para você ·</textPath></text></svg>
       </div>
       <div class="layer badge glass" data-depth="-34"><span class="dot"></span>Envio para todo o Brasil</div>
       <div class="layer float-card glass" data-depth="38">
-        <div class="media"><div class="ph A" style="--c:3;--r:1"></div></div>
-        <div><small>Destaque</small><b>Vestido Linho Areia</b></div>
+        <div class="media"><img class="ph" src="assets/fotos/jaqueta-cropped-close.jpg" alt="" style="--pos:50% 30%"></div>
+        <div><small>Destaque</small><b>Jaqueta Cropped</b></div>
       </div>
     </div>
   </div>
@@ -462,16 +512,16 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
 
     <div class="cats" data-stagger>
       <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
-        <div class="tilt gb spot"><div class="media"><div class="ph A" style="--c:2;--r:0"></div></div><div class="cat-info"><h3>Vestidos</h3><span>Ver peças</span></div></div>
+        <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/python-corpo.jpg" alt="" loading="lazy" style="--pos:45% 30%"></div><div class="cat-info"><h3>Saias &amp; Blusas</h3><span>Ver peças</span></div></div>
       </a>
       <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
-        <div class="tilt gb spot"><div class="media"><div class="ph B" style="--c:4;--r:1"></div></div><div class="cat-info"><h3>Conjuntos</h3><span>Ver peças</span></div></div>
+        <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/blazer-cinza-frente.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Conjuntos</h3><span>Ver peças</span></div></div>
       </a>
       <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
-        <div class="tilt gb spot"><div class="media"><div class="ph B" style="--c:4;--r:0"></div></div><div class="cat-info"><h3>Macacões</h3><span>Ver peças</span></div></div>
+        <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/macacao-frente.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Macacões</h3><span>Ver peças</span></div></div>
       </a>
       <a class="cat rv" href="#novidades" data-go data-cursor="Ver">
-        <div class="tilt gb spot"><div class="media"><div class="ph B" style="--c:2;--r:1"></div></div><div class="cat-info"><h3>Jaquetas</h3><span>Ver peças</span></div></div>
+        <div class="tilt gb spot"><div class="media"><img class="ph" src="assets/fotos/jaqueta-cropped-corpo.jpg" alt="" loading="lazy" style="--pos:50% 15%"></div><div class="cat-info"><h3>Jaquetas</h3><span>Ver peças</span></div></div>
       </a>
     </div>
   </div>
@@ -494,50 +544,123 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
 <!-- EDITORIAL -->
 <section class="sec editorial">
   <div class="wrap ed-grid">
-    <div class="ed-stage" role="img" aria-label="Looks da coleção verão: vestidos floral e linho">
+    <div class="ed-stage" role="img" aria-label="Conjunto risca de giz e blazer cinza da D'Madame">
       <div class="ring pl" data-speed="-.06" aria-hidden="true"></div>
-      <div class="pl pl1" data-speed=".10" data-rot="-2"><div class="media clip sweep"><div class="ph A" style="--c:2;--r:1"></div></div></div>
-      <div class="pl pl2" data-speed="-.14" data-rot="3"><div class="media clip" style="--d:200ms"><div class="ph A" style="--c:1;--r:1"></div></div></div>
-      <div class="pl pl3" data-speed=".22" data-rot="-3"><div class="media clip" style="--d:400ms"><div class="ph A" style="--c:4;--r:1"></div></div></div>
+      <div class="pl pl1" data-speed=".10" data-rot="-2"><div class="media clip sweep"><img class="ph" src="assets/fotos/risca-giz-close.jpg" alt="" loading="lazy" style="--pos:50% 18%"></div></div>
+      <div class="pl pl2" data-speed="-.14" data-rot="3"><div class="media clip" style="--d:200ms"><img class="ph" src="assets/fotos/risca-giz-pose.jpg" alt="" loading="lazy" style="--pos:70% 30%"></div></div>
+      <div class="pl pl3" data-speed=".22" data-rot="-3"><div class="media clip" style="--d:400ms"><img class="ph" src="assets/fotos/blazer-cinza-costas.jpg" alt="" loading="lazy" style="--pos:50% 30%"></div></div>
     </div>
     <div class="ed-copy">
-      <p class="eyebrow rv">Coleção Verão</p>
-      <h2 data-split>Leve. <em>Refinada.</em><br>Sem esforço.</h2>
-      <p class="rv" style="margin-top:26px">Tecidos leves, estampas delicadas e cortes que acompanham o seu movimento. Pensada para dias de sol e fins de tarde com as amigas.</p>
+      <p class="eyebrow rv">Alfaiataria urbana</p>
+      <h2 data-split>Poder. <em>Elegância.</em><br>Atitude.</h2>
+      <p class="rv" style="margin-top:26px">Risca de giz, cortes cropped e cintura marcada: alfaiataria com atitude para quem vive a cidade sem abrir mão do conforto.</p>
       <ul class="ed-list" data-stagger>
-        <li class="rv">Linho & viscose <span>tecidos respiráveis</span></li>
-        <li class="rv">Florais em rubi <span>estampa exclusiva</span></li>
-        <li class="rv">Rendas off-white <span>para ocasiões especiais</span></li>
+        <li class="rv">Blazer cropped <span>risca de giz</span></li>
+        <li class="rv">Pantalona com cordão <span>caimento amplo</span></li>
+        <li class="rv">Conjunto cinza <span>blazer + saia envelope</span></li>
       </ul>
-      <a class="btn btn-wine magnetic rv" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl">Explorar coleção <svg><use href="#i-arrow"/></svg></span></a>
+      <a class="btn btn-wine magnetic rv" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl">Quero esse estilo <svg><use href="#i-arrow"/></svg></span></a>
     </div>
   </div>
 </section>
 
-<!-- LOOKBOOK (horizontal, scroll-driven) -->
-<section class="hs" id="lookbook">
-  <div class="hs-pin">
-    <div class="wrap sec-head" style="margin-bottom:0">
-      <div><p class="eyebrow rv">Lookbook</p><h2 data-split>Inspiração em <em>movimento</em></h2></div>
-      <span class="hs-count rv"><span id="hsNum">01</span> / 08</span>
+<!-- LOOKBOOK (sticky chapters) -->
+<section class="sec" id="lookbook" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <div><p class="eyebrow rv">Lookbook</p><h2 data-split>Quatro looks, <em>quatro histórias</em></h2></div>
+      <p class="lead rv">Role devagar: cada look tem o seu momento.</p>
     </div>
-    <div class="hs-track" id="hsTrack">
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph A" style="--c:0;--r:0"></div></div><figcaption><b>Risca de giz</b>01</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph A" style="--c:0;--r:1"></div></div><figcaption><b>Floral rubi</b>02</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph B" style="--c:1;--r:1"></div></div><figcaption><b>Corações</b>03</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph B" style="--c:3;--r:0"></div></div><figcaption><b>Grafite</b>04</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph A" style="--c:4;--r:0"></div></div><figcaption><b>Renda</b>05</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph B" style="--c:1;--r:0"></div></div><figcaption><b>Street</b>06</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph A" style="--c:3;--r:1"></div></div><figcaption><b>Areia</b>07</figcaption></figure>
-      <figure class="look" data-cursor="Look"><div class="media"><div class="ph B" style="--c:3;--r:1"></div></div><figcaption><b>Alfaiataria</b>08</figcaption></figure>
-      <div class="hs-end">
-        <h3>Gostou de algum look?</h3>
-        <p class="lead" style="margin:0">Mande o print no WhatsApp e a gente separa para você.</p>
-        <div><a class="btn btn-primary magnetic" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl"><svg><use href="#i-wa"/></svg>Chamar agora</span></a></div>
+    <div class="chap-grid">
+      <div class="chap-stage" aria-hidden="true">
+        <div class="chap-frames">
+          <div class="frame on" style="--pos:50% 18%"><img src="assets/fotos/python-frente.jpg" alt="" loading="lazy"></div>
+          <div class="frame" style="--pos:50% 25%"><img src="assets/fotos/jaqueta-coracoes.jpg" alt="" loading="lazy"></div>
+          <div class="frame" style="--pos:50% 12%"><img src="assets/fotos/macacao-costas.jpg" alt="" loading="lazy"></div>
+          <div class="frame" style="--pos:50% 20%"><img src="assets/fotos/camiseta-stay-cool.jpg" alt="" loading="lazy"></div>
+          <span class="chap-num"><b id="chapNum">01</b> / 04</span>
+          <span class="chap-bar"><i id="chapBar"></i></span>
+        </div>
+      </div>
+      <div class="chaps">
+        <article class="chap on">
+          <div class="media mimg"><img class="ph" src="assets/fotos/python-frente.jpg" alt="Blusa de chiffon preta com saia estampa python" loading="lazy"></div>
+          <div class="chap-in">
+            <div class="idx">01</div>
+            <h3>Noite em <em>preto &amp; python</em></h3>
+            <p>Transparência na medida certa e uma saia que rouba a cena. Para o jantar, o happy hour ou aquela noite que pede presença.</p>
+            <div class="chips"><span>Blusa chiffon</span><span>Saia python</span><span>Mangas bufantes</span></div>
+            <a class="link-arrow" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">Quero esse look <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+        <article class="chap">
+          <div class="media mimg"><img class="ph" src="assets/fotos/jaqueta-coracoes.jpg" alt="Jaqueta cropped off-white com corações de tachas nas costas" loading="lazy"></div>
+          <div class="chap-in">
+            <div class="idx">02</div>
+            <h3>Denim com <em>coração</em></h3>
+            <p>A jaqueta cropped off-white com corações de tachas nas costas: o detalhe que faz todo mundo olhar duas vezes.</p>
+            <div class="chips"><span>Jaqueta cropped</span><span>Tachas douradas</span><span>Jeans wide leg</span></div>
+            <a class="link-arrow" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">Quero esse look <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+        <article class="chap">
+          <div class="media mimg"><img class="ph" src="assets/fotos/macacao-costas.jpg" alt="Macacão pantalona grafite visto de costas" loading="lazy"></div>
+          <div class="chap-in">
+            <div class="idx">03</div>
+            <h3>Grafite <em>sem esforço</em></h3>
+            <p>Uma peça, look pronto. Macacão pantalona com decote V, bolsos laterais e zíper dourado nas costas.</p>
+            <div class="chips"><span>Macacão pantalona</span><span>Decote V</span><span>Zíper dourado</span></div>
+            <a class="link-arrow" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">Quero esse look <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+        <article class="chap">
+          <div class="media mimg"><img class="ph" src="assets/fotos/camiseta-stay-cool.jpg" alt="Camiseta oversized preta com estampa Stay Cool nas costas" loading="lazy"></div>
+          <div class="chap-in">
+            <div class="idx">04</div>
+            <h3>Street <em>cool</em></h3>
+            <p>Camiseta oversized com estampa na frente e nas costas. Com jeans, tênis e muita atitude.</p>
+            <div class="chips"><span>Oversized</span><span>Estampa frente &amp; costas</span><span>Algodão</span></div>
+            <a class="link-arrow" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">Quero esse look <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
       </div>
     </div>
   </div>
 </section>
+
+<!-- GALLERY -->
+<section class="sec" id="galeria">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">Galeria</p><h2 data-split>Mais looks da <em>D'Madame</em></h2></div>
+      <p class="lead rv">Toque em uma foto para ver de perto.</p>
+    </div>
+    <div class="gallery" id="gallery">
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-corpo.jpg" width="1430" height="1748" alt="Conjunto risca de giz: blazer cropped e pantalona" loading="lazy"><span class="cap">Risca de giz</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-corpo.jpg" width="1170" height="1170" alt="Blusa chiffon e saia python com bota preta" loading="lazy"><span class="cap">Preto &amp; python</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/camiseta-coelho.jpg" width="1440" height="1800" alt="Camiseta oversized preta com estampa de coelho" loading="lazy"><span class="cap">Camiseta coelho</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-cropped-corpo.jpg" width="1108" height="1364" alt="Jaqueta cropped off-white com jeans wide leg" loading="lazy"><span class="cap">Jaqueta cropped</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/macacao-frente.jpg" width="1333" height="1666" alt="Macacão pantalona grafite com decote V" loading="lazy"><span class="cap">Macacão grafite</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/blazer-cinza-frente.jpg" width="1065" height="1331" alt="Conjunto blazer cropped e saia envelope cinza" loading="lazy"><span class="cap">Blazer &amp; saia cinza</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-pose.jpg" width="1440" height="1800" alt="Blazer risca de giz com colar dourado" loading="lazy"><span class="cap">Detalhes dourados</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-costas.jpg" width="1170" height="1170" alt="Blusa chiffon preta e saia python vistas de costas" loading="lazy"><span class="cap">Python, costas</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-cropped-close.jpg" width="1073" height="1073" alt="Jaqueta cropped off-white com bolsa" loading="lazy"><span class="cap">Off-white</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/camiseta-stay-cool.jpg" width="984" height="984" alt="Camiseta Stay Cool vista de costas" loading="lazy"><span class="cap">Stay cool</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/risca-giz-close.jpg" width="1425" height="1735" alt="Blazer cropped risca de giz com cordão branco" loading="lazy"><span class="cap">Cropped</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/macacao-costas.jpg" width="1333" height="1666" alt="Macacão grafite com zíper dourado nas costas" loading="lazy"><span class="cap">Zíper dourado</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/jaqueta-coracoes.jpg" width="1170" height="1170" alt="Costas da jaqueta com corações de tachas" loading="lazy"><span class="cap">Corações</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/python-frente.jpg" width="1170" height="1170" alt="Blusa com babados e saia python" loading="lazy"><span class="cap">Babados</span></button>
+      <button class="g-item rv" data-cursor="Ver"><img src="assets/fotos/blazer-cinza-costas.jpg" width="665" height="665" alt="Conjunto blazer e short cinza visto de costas" loading="lazy"><span class="cap">Alfaiataria cinza</span></button>
+    </div>
+  </div>
+</section>
+
+<dialog class="lb" id="lb" aria-label="Foto ampliada">
+  <figure><img id="lbImg" src="" alt=""><figcaption><span id="lbCap"></span><small id="lbNum"></small></figcaption></figure>
+  <button class="lb-btn lb-close" aria-label="Fechar"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button class="lb-btn lb-prev" aria-label="Foto anterior"><svg><use href="#i-arrow"/></svg></button>
+  <button class="lb-btn lb-next" aria-label="Próxima foto"><svg><use href="#i-arrow"/></svg></button>
+</dialog>
 
 <!-- MANIFESTO -->
 <section class="manifesto" id="sobre">
@@ -606,20 +729,25 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   if (reduce) document.documentElement.classList.add('reduce');
 
   /* ---------- products ---------- */
+  // photo = file in assets/fotos, or [col,row] of the Instagram-grid sprite (summer dresses)
   const products = [
-    ['A', 2, 0, 4, 0, 'Vestido Renda Off-White', 'Renda · alças finas', ['#efe6d6'], 'Novo'],
-    ['A', 0, 1, 1, 1, 'Vestido Floral Rubi', 'Linho estampado', ['#f3ece2', '#c3243b'], 'Verão'],
-    ['A', 0, 0, 1, 0, 'Conjunto Risca de Giz', 'Blazer cropped + calça', ['#4b4f5c'], 'Novo'],
-    ['A', 3, 1, 4, 1, 'Vestido Linho Areia', 'Alças de amarrar', ['#cdbb9f'], 'Favorito'],
-    ['B', 2, 0, 3, 0, 'Macacão Pantalona Grafite', 'Decote V · bolsos', ['#5e5857'], 'Novo'],
-    ['B', 1, 0, 0, 0, 'Camiseta Stay Cool', 'Oversized estampada', ['#111', '#fff'], 'Street'],
-    ['B', 1, 1, 0, 1, 'Jaqueta Corações', 'Sarja com tachas', ['#eee6d8'], 'Exclusiva'],
-    ['B', 4, 1, 3, 1, 'Conjunto Blazer & Short', 'Alfaiataria cinza', ['#8a8b8d'], 'Novo']
+    ['risca-giz-corpo', 'risca-giz-close', 'Conjunto Risca de Giz', 'Blazer cropped + pantalona', ['#4b4f5c'], 'Novo'],
+    ['python-corpo', 'python-costas', 'Blusa Chiffon & Saia Python', 'Mangas bufantes · saia curta', ['#111', '#b9ae9c'], 'Novo'],
+    ['jaqueta-cropped-corpo', 'jaqueta-coracoes', 'Jaqueta Cropped Corações', 'Sarja com tachas douradas', ['#eee6d8'], 'Exclusiva'],
+    ['macacao-frente', 'macacao-costas', 'Macacão Pantalona Grafite', 'Decote V · zíper dourado', ['#5e5857'], 'Favorito'],
+    ['blazer-cinza-frente', 'blazer-cinza-costas', 'Conjunto Blazer & Saia Cinza', 'Alfaiataria · saia envelope', ['#8a8b8d'], 'Novo'],
+    ['camiseta-coelho', 'camiseta-stay-cool', 'Camiseta Oversized Stay Cool', 'Estampa frente e costas', ['#111', '#fff'], 'Street'],
+    [[2, 0], [4, 0], 'Vestido Renda Off-White', 'Renda · alças finas', ['#efe6d6'], 'Verão'],
+    [[0, 1], [1, 1], 'Vestido Floral Rubi', 'Linho estampado', ['#f3ece2', '#c3243b'], 'Verão'],
+    [[3, 1], [4, 1], 'Vestido Linho Areia', 'Alças de amarrar', ['#cdbb9f'], 'Verão']
   ];
-  $('#prods').innerHTML = products.map(([s, c, r, c2, r2, name, desc, cols, tag]) => `
+  const photo = (p, alt, cls = '') => Array.isArray(p)
+    ? `<div class="ph sp A ${cls}" style="--c:${p[0]};--r:${p[1]}" role="img" aria-label="${alt}"></div>`
+    : `<img class="ph ${cls}" src="assets/fotos/${p}.jpg" alt="${alt}" loading="lazy" style="--pos:50% 15%">`;
+  $('#prods').innerHTML = products.map(([p1, p2, name, desc, cols, tag]) => `
     <article class="prod rv">
       <div class="prod-media tilt gb spot" data-cursor="Ver">
-        <div class="media"><div class="ph ${s}" style="--c:${c};--r:${r}"></div><div class="ph ${s} alt" style="--c:${c2};--r:${r2}"></div></div>
+        <div class="media">${photo(p1, name)}${photo(p2, '', 'alt')}</div>
         <span class="tag glass">${tag}</span>
         <button class="fav glass" aria-pressed="false" aria-label="Favoritar ${name}"><svg><use href="#i-heart"/></svg></button>
         <a class="quick" href="${WA}" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Pedir no WhatsApp</a>
@@ -627,6 +755,37 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       <div class="prod-info"><div><h3>${name}</h3><p>${desc}</p></div><div class="dots">${cols.map(x => `<i style="background:${x}"></i>`).join('')}</div></div>
     </article>`).join('');
   $$('.fav').forEach(b => b.addEventListener('click', e => { e.preventDefault(); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); }));
+
+  /* ---------- gallery lightbox ---------- */
+  const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'), lbNum = $('#lbNum');
+  const gItems = $$('.g-item');
+  let lbIdx = 0;
+  function showPhoto(i, animate) {
+    lbIdx = (i + gItems.length) % gItems.length;
+    const img = $('img', gItems[lbIdx]);
+    const apply = () => {
+      lbImg.src = img.src; lbImg.alt = img.alt;
+      lbCap.textContent = $('.cap', gItems[lbIdx]).textContent;
+      lbNum.textContent = `${String(lbIdx + 1).padStart(2, '0')} / ${gItems.length}`;
+    };
+    if (!animate || reduce) { apply(); return; }
+    lbImg.classList.add('swap');
+    setTimeout(() => { apply(); lbImg.decode().catch(() => {}).then(() => lbImg.classList.remove('swap')); }, 280);
+  }
+  gItems.forEach((g, i) => g.addEventListener('click', () => { showPhoto(i); lb.showModal(); lenis && lenis.stop(); }));
+  $('.lb-close').addEventListener('click', () => lb.close());
+  $('.lb-prev').addEventListener('click', () => showPhoto(lbIdx - 1, true));
+  $('.lb-next').addEventListener('click', () => showPhoto(lbIdx + 1, true));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('close', () => { lenis && lenis.start(); gItems[lbIdx].focus({ preventScroll: true }); });
+  lb.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') showPhoto(lbIdx + 1, true);
+    if (e.key === 'ArrowLeft') showPhoto(lbIdx - 1, true);
+  });
+  // swipe on touch screens
+  let tx = null;
+  lb.addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive: true });
+  lb.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) showPhoto(lbIdx + (dx < 0 ? 1 : -1), true); tx = null; });
 
   /* ---------- split text ---------- */
   $$('[data-split]').forEach(el => {
@@ -785,20 +944,19 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
   const progress = $('.progress');
   const cssTimeline = CSS.supports('animation-timeline: scroll()');
   const speedEls = $$('[data-speed]').map(el => ({ el, s: +el.dataset.speed, rot: +el.dataset.rot || 0, host: el.parentElement }));
-  const hs = $('#lookbook'), track = $('#hsTrack'), looks = $$('.look', track), hsNum = $('#hsNum');
   const wa = $('.wa-float');
-  const useHS = !reduce && innerWidth >= 700;
-  if (!useHS) document.documentElement.classList.add('no-hs');
-  let hsTop = 0, hsDist = 0;
-  function measure() {
-    if (!useHS) return;
-    hsDist = Math.max(0, track.scrollWidth - innerWidth);
-    hs.style.height = (hsDist + innerHeight) + 'px';
-    hsTop = hs.getBoundingClientRect().top + scrollY;
+  // lookbook chapters: the sticky frame for the chapter crossing mid-screen gets revealed
+  const chaps = $$('.chap'), frames = $$('.frame'), chapNum = $('#chapNum'), chapBar = $('#chapBar'), chapsWrap = $('.chaps');
+  let chapActive = 0;
+  function setChapter(i) {
+    if (i === chapActive) return;
+    chapActive = i;
+    chaps.forEach((c, k) => c.classList.toggle('on', k === i));
+    frames.forEach((f, k) => { f.classList.toggle('on', k === i); f.classList.toggle('past', k < i); });
+    chapNum.textContent = String(i + 1).padStart(2, '0');
   }
-  measure(); addEventListener('resize', measure); addEventListener('load', measure);
 
-  let lastY = -1, lastDir = 0, skew = 0, heroVisible = true;
+  let lastY = -1, lastDir = 0, heroVisible = true;
   new IntersectionObserver(([e]) => heroVisible = e.isIntersecting).observe(hero);
 
   function onScroll(y, vel) {
@@ -809,6 +967,14 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
     wa.classList.toggle('show', y > vh * .7);
     if (!cssTimeline) progress.style.transform = `scaleX(${clamp(y / (document.documentElement.scrollHeight - vh), 0, 1)})`;
 
+    // lookbook chapters
+    const cr = chapsWrap.getBoundingClientRect();
+    if (cr.top < vh && cr.bottom > 0) {
+      let idx = 0;
+      chaps.forEach((c, k) => { if (c.getBoundingClientRect().top < vh * .5) idx = k; });
+      setChapter(idx);
+      chapBar.style.setProperty('--p', clamp((vh * .5 - cr.top) / cr.height, 0, 1).toFixed(3));
+    }
     if (reduce) return;
     // 3D parallax layers
     speedEls.forEach(({ el, s, rot, host }) => {
@@ -817,14 +983,6 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       const c = (r.top + r.height / 2 - vh / 2);
       el.style.transform = `translate3d(0, ${(-c * s).toFixed(1)}px, 0) rotate(${(rot * c / vh).toFixed(2)}deg)`;
     });
-    // horizontal lookbook with liquid velocity skew
-    if (useHS) {
-      const p = clamp((y - hsTop) / (hs.offsetHeight - vh || 1), 0, 1);
-      track.style.transform = `translate3d(${(-p * hsDist).toFixed(1)}px,0,0)`;
-      skew = lerp(skew, clamp((vel || 0) * -0.12, -4, 4), .12);
-      looks.forEach(l => l.style.transform = `skewX(${skew.toFixed(2)}deg)`);
-      hsNum.textContent = String(Math.min(8, 1 + Math.floor(p * 8))).padStart(2, '0');
-    }
     // manifesto word-by-word
     const mr = man.getBoundingClientRect();
     if (mr.top < vh && mr.bottom > 0) {
