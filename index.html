@@ -360,27 +360,69 @@ em.wi{font-style:italic;color:var(--gold)}
 .no-js .mw,.reduce .mw{opacity:1}
 .manifesto .sig{margin-top:44px;display:inline-flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 
-/* visit + cta */
+/* visit: map + cta + contacts + steps */
 .visit-grid{display:grid;gap:16px}
-@media(min-width:960px){.visit-grid{grid-template-columns:1.4fr 1fr}}
-.cta-card{position:relative;overflow:hidden;border-radius:28px;padding:clamp(36px,6vw,80px);background:var(--bg2);isolation:isolate}
+@media(min-width:960px){.visit-grid{grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto}.map-card{grid-row:1/3}}
+.map-card{position:relative;min-height:440px;border-radius:28px;overflow:hidden;background:var(--bg3);box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
+@media(min-width:960px){.map-card{min-height:620px}}
+/* dark, warm map to match the site (the pin keeps its red thanks to the hue-rotate) */
+.map{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(180deg) grayscale(.35) sepia(.18) contrast(.92) brightness(.92);transform:scale(1.02)}
+.map-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,10,9,.35),transparent 22%,transparent 55%,rgba(12,10,9,.85)),radial-gradient(120% 80% at 50% 45%,transparent 55%,rgba(12,10,9,.55));box-shadow:inset 0 0 0 1px rgba(241,231,216,.1);border-radius:inherit}
+.map-info{position:absolute;left:16px;right:16px;bottom:16px;border-radius:22px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:14px 16px;align-items:center;background:rgba(20,17,16,.72)}
+.map-info .logo-mark{width:52px;height:52px}
+.map-addr small{display:block;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.map-addr b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.15}
+.map-addr span{font-size:13px;color:var(--muted)}
+.map-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px}
+@media(min-width:700px){.map-info{left:24px;right:auto;bottom:24px;max-width:520px;grid-template-columns:auto 1fr auto}.map-actions{grid-column:auto;flex-direction:column}}
+.cta-card{position:relative;overflow:hidden;border-radius:28px;padding:clamp(32px,4vw,52px);background:var(--bg2);isolation:isolate}
 .cta-card .aurora{inset:-30%;opacity:.9;z-index:-1}
-.cta-card h2{max-width:12em;margin-bottom:24px}
-.cta-card .lead{margin-bottom:38px}
-.info-card{border-radius:28px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:26px}
-.info-card h3{font-size:34px}
-.info-row{display:flex;gap:16px;align-items:flex-start;padding-bottom:22px;border-bottom:1px solid var(--line)}
-.info-row:last-child{border:0;padding:0}
-.info-row svg{width:22px;height:22px;flex:none;stroke:var(--gold);fill:none;stroke-width:1.3;margin-top:3px}
-.info-row small{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.info-row a:hover{color:var(--gold)}
+.cta-card h2{font-size:clamp(34px,3.6vw,52px);max-width:12em;margin-bottom:18px}
+.cta-card .lead{margin-bottom:30px}
+.info-card{border-radius:28px;padding:10px 26px;display:flex;flex-direction:column}
+.info-row{display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:14px;transition:color .4s}
+.info-row:last-child{border:0}
+.info-row .ic{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:rgba(241,231,216,.03);transition:border-color .4s,background .4s}
+.info-row .ic svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.4;color:var(--gold)}
+.info-row small{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+.info-row .go{width:16px;height:16px;margin-left:auto;color:var(--gold);opacity:.5;transition:transform .6s var(--ease),opacity .4s}
+a.info-row:hover{color:var(--gold)}
+a.info-row:hover .ic{border-color:rgba(210,173,116,.5);background:rgba(210,173,116,.08)}
+a.info-row:hover .go{transform:translateX(5px);opacity:1}
+.steps{display:grid;gap:14px;margin-top:16px}
+@media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{border-radius:22px;padding:26px;display:flex;gap:18px;align-items:flex-start;background:linear-gradient(180deg,rgba(241,231,216,.035),rgba(241,231,216,.01))}
+.step .num{font-family:var(--serif);font-size:44px;line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(210,173,116,.6)}
+.step h3{font-size:22px;margin-bottom:4px}
+.step p{margin:0;font-size:14px;color:var(--muted)}
+.toast{position:fixed;z-index:190;left:50%;bottom:28px;transform:translate(-50%,20px);padding:12px 20px;border-radius:999px;background:var(--cream);color:var(--bg);font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .5s var(--ease),transform .6s var(--ease);box-shadow:0 20px 50px -20px #000}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
-.foot-big{font-family:var(--serif);font-size:clamp(70px,17vw,250px);line-height:.85;letter-spacing:.04em;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(241,231,216,.18);margin:0 0 50px;user-select:none;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(210,173,116,.9),transparent 50%);-webkit-background-clip:text;background-clip:text}
-.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted)}
-.foot-row nav{display:flex;gap:24px;flex-wrap:wrap}
-.foot-row a:hover{color:var(--cream)}
+footer{position:relative;padding:90px 0 34px;overflow:hidden;border-top:1px solid transparent;border-image:linear-gradient(90deg,transparent,rgba(210,173,116,.35),transparent) 1}
+.foot-glow{position:absolute;left:50%;bottom:-260px;width:900px;height:520px;margin-left:-450px;border-radius:50%;background:radial-gradient(closest-side,rgba(125,18,36,.35),transparent);filter:blur(40px);pointer-events:none}
+.foot-top{position:relative;display:grid;gap:40px 28px;grid-template-columns:1fr 1fr}
+@media(min-width:960px){.foot-top{grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}}
+.foot-brand{grid-column:1/-1}
+@media(min-width:960px){.foot-brand{grid-column:auto}}
+.foot-brand p{color:var(--muted);font-size:14px;max-width:34ch;margin:18px 0 22px}
+.socials{display:flex;gap:10px}
+.soc{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--cream);transition:border-color .4s,background .4s,color .4s}
+.soc svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4}
+.soc:hover{border-color:rgba(210,173,116,.6);background:rgba(210,173,116,.1);color:var(--gold)}
+.foot-col{display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--muted)}
+.foot-col h4{margin:0 0 6px;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.foot-col a{width:fit-content;position:relative;transition:color .4s}
+.foot-col a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ease)}
+.foot-col a:hover{color:var(--cream)}
+.foot-col a:hover::after{transform:scaleX(1);transform-origin:left}
+.foot-big{position:relative;font-family:var(--serif);font-size:clamp(64px,16vw,240px);line-height:.85;letter-spacing:.04em;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(241,231,216,.16);margin:70px 0 34px;user-select:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(210,173,116,.9),transparent 50%);-webkit-background-clip:text;background-clip:text}
+.foot-bottom{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);letter-spacing:.04em}
+.foot-love i{font-style:normal;color:var(--wine)}
+.to-top{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--cream);transition:border-color .4s,background .4s}
+.to-top svg{width:16px;height:16px;transform:rotate(-90deg)}
+.to-top:hover{border-color:rgba(210,173,116,.6);background:rgba(210,173,116,.1)}
+@media(max-width:600px){.foot-love{display:none}}
 
 /* floating whatsapp */
 .wa-float{position:fixed;z-index:80;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--wine),var(--wine2));color:#fff;box-shadow:0 14px 40px -10px rgba(195,36,59,.7);transform:scale(0);transition:transform .8s var(--ease)}
@@ -652,46 +694,110 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
 
 <!-- VISIT -->
 <section class="sec" id="visite" style="padding-top:0">
-  <div class="wrap visit-grid">
-    <div class="cta-card gb spot rv">
-      <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-      <p class="eyebrow">Atendimento</p>
-      <h2 data-split>Sua próxima peça favorita está a <em>uma mensagem</em> de distância.</h2>
-      <p class="lead">Consulte tamanhos, cores e disponibilidade. Respondemos com carinho e enviamos para todo o Brasil.</p>
-      <a class="btn btn-wine magnetic" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl"><svg><use href="#i-wa"/></svg>Conversar no WhatsApp</span></a>
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow rv">Visite a D'Madame</p><h2 data-split>Venha nos <em>conhecer</em></h2></div>
+      <p class="lead rv">Pertinho de você no centro de Tatuí, ou onde você estiver, pelo WhatsApp.</p>
     </div>
-    <div class="info-card glass rv" style="--d:150ms">
-      <h3>Visite a loja</h3>
-      <div class="info-row">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-        <div><small>Endereço</small><a href="https://www.google.com/maps/search/?api=1&query=Quinze+de+Novembro+200+Tatu%C3%AD+SP" target="_blank" rel="noopener">R. Quinze de Novembro, 200<br>Tatuí · SP · 18270-310</a></div>
+    <div class="visit-grid">
+      <div class="map-card rv">
+        <iframe class="map" title="Mapa com a localização da D'Madame em Tatuí" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=R.%20Quinze%20de%20Novembro%2C%20200%2C%20Tatu%C3%AD%20-%20SP%2C%2018270-310&z=16&output=embed"></iframe>
+        <div class="map-shade" aria-hidden="true"></div>
+        <div class="map-info glass">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <div class="map-addr">
+            <small>Nossa loja</small>
+            <b>R. Quinze de Novembro, 200</b>
+            <span>Tatuí · SP · 18270-310</span>
+          </div>
+          <div class="map-actions">
+            <a class="btn btn-primary btn-sm magnetic" href="https://www.google.com/maps/dir/?api=1&destination=R.+Quinze+de+Novembro+200+Tatu%C3%AD+SP+18270-310" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M12 3l8 8-8 8-8-8z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M9.5 13v-2h5M13 9l1.5 2-1.5 2"/></svg>Como chegar</span></a>
+            <button class="btn btn-ghost btn-sm magnetic" id="copyAddr" type="button"><span class="fill"></span><span class="lbl"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Copiar endereço</span></button>
+          </div>
+        </div>
       </div>
-      <div class="info-row">
-        <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".6"/></svg>
-        <div><small>Instagram</small><a href="https://instagram.com/dmadame5" target="_blank" rel="noopener">@dmadame5</a></div>
+
+      <div class="cta-card gb spot rv" style="--d:120ms">
+        <div class="aurora" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+        <p class="eyebrow">Atendimento</p>
+        <h2 data-split>Sua próxima peça favorita está a <em>uma mensagem</em>.</h2>
+        <p class="lead">Consulte tamanhos, cores e disponibilidade. Respondemos com carinho.</p>
+        <a class="btn btn-wine magnetic" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener"><span class="fill"></span><span class="lbl"><svg><use href="#i-wa"/></svg>Conversar no WhatsApp</span></a>
       </div>
-      <div class="info-row">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
-        <div><small>Horários</small>Consulte pelo WhatsApp</div>
+
+      <div class="info-card glass rv" style="--d:220ms">
+        <a class="info-row" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">
+          <span class="ic"><svg><use href="#i-wa"/></svg></span>
+          <div><small>WhatsApp</small>Fale com a gente</div><svg class="go"><use href="#i-arrow"/></svg>
+        </a>
+        <a class="info-row" href="https://instagram.com/dmadame5" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".6"/></svg></span>
+          <div><small>Instagram</small>@dmadame5</div><svg class="go"><use href="#i-arrow"/></svg>
+        </a>
+        <div class="info-row">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <div><small>Horários</small>Consulte pelo WhatsApp</div>
+        </div>
+        <div class="info-row">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+          <div><small>Envio</small>Para todo o Brasil</div>
+        </div>
       </div>
+    </div>
+
+    <div class="steps" data-stagger>
+      <div class="step gb spot rv"><span class="num">01</span><div><h3>Escolha seu look</h3><p>Veja as novidades aqui no site ou no nosso Instagram.</p></div></div>
+      <div class="step gb spot rv"><span class="num">02</span><div><h3>Chame no WhatsApp</h3><p>Tiramos dúvidas de tamanho, cor e caimento, sem pressa.</p></div></div>
+      <div class="step gb spot rv"><span class="num">03</span><div><h3>Receba com carinho</h3><p>Enviamos para todo o Brasil, embalado com todo cuidado.</p></div></div>
     </div>
   </div>
 </section>
 </main>
 
 <footer>
+  <div class="foot-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="foot-big" aria-hidden="true">D'MADAME</p>
-    <div class="foot-row">
-      <span>© 2026 D'Madame · Tatuí/SP · Com muito amor, para você.</span>
-      <nav aria-label="Rodapé">
-        <a href="https://instagram.com/dmadame5" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="#inicio" data-go>Voltar ao topo ↑</a>
+    <div class="foot-top">
+      <div class="foot-brand rv">
+        <a href="#inicio" class="brand" data-go aria-label="D'Madame — início"><span class="logo-mark"></span><b>D'Madame</b></a>
+        <p>Com muito amor, para você. Moda feminina com estilo e confiança, de Tatuí para todo o Brasil.</p>
+        <div class="socials">
+          <a class="soc magnetic" href="https://instagram.com/dmadame5" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".6"/></svg></a>
+          <a class="soc magnetic" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+          <a class="soc magnetic" href="https://www.google.com/maps/search/?api=1&query=R.+Quinze+de+Novembro+200+Tatu%C3%AD+SP" target="_blank" rel="noopener" aria-label="Ver no mapa"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></a>
+        </div>
+      </div>
+      <nav class="foot-col rv" aria-label="Navegação do rodapé" style="--d:80ms">
+        <h4>Navegue</h4>
+        <a href="#provador" data-go>Provador</a>
+        <a href="#colecao" data-go>Coleção</a>
+        <a href="#novidades" data-go>Novidades</a>
+        <a href="#lookbook" data-go>Lookbook</a>
+        <a href="#sobre" data-go>Sobre</a>
       </nav>
+      <div class="foot-col rv" style="--d:160ms">
+        <h4>Atendimento</h4>
+        <a href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://instagram.com/dmadame5" target="_blank" rel="noopener">@dmadame5</a>
+        <span>Envio para todo o Brasil</span>
+      </div>
+      <div class="foot-col rv" style="--d:240ms">
+        <h4>Loja</h4>
+        <span>R. Quinze de Novembro, 200<br>Tatuí · SP · 18270-310</span>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Quinze+de+Novembro+200+Tatu%C3%AD+SP+18270-310" target="_blank" rel="noopener">Como chegar →</a>
+      </div>
+    </div>
+    <p class="foot-big" aria-hidden="true">D'MADAME</p>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> D'Madame · Tatuí/SP</span>
+      <span class="foot-love">Feito com <i>♥</i> para você</span>
+      <a class="to-top magnetic" href="#inicio" data-go aria-label="Voltar ao topo"><svg><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 
 <a class="wa-float magnetic" href="https://wa.me/message/ZTFVABBL25WGA1" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
@@ -732,6 +838,17 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px;overflow:hidden}
       <div class="prod-info"><div><h3>${name}</h3><p>${desc}</p></div><div class="dots">${cols.map(x => `<i style="background:${x}"></i>`).join('')}</div></div>
     </article>`).join('');
   $$('.fav').forEach(b => b.addEventListener('click', e => { e.preventDefault(); b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); }));
+
+  /* ---------- visit: copy address + footer year ---------- */
+  const toast = $('#toast');
+  let toastT;
+  const showToast = msg => { toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('show'), 2400); };
+  $('#copyAddr').addEventListener('click', async () => {
+    const addr = 'R. Quinze de Novembro, 200 - Tatuí/SP - 18270-310';
+    try { await navigator.clipboard.writeText(addr); showToast('Endereço copiado ✓'); }
+    catch { showToast(addr); }
+  });
+  $('#year').textContent = new Date().getFullYear();
 
   /* ---------- provador (outfit changes on the pinned model) ----------
      `photo`: picture of the SAME mannequin (1131x2000, white background) in each look.
