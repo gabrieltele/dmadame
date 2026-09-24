@@ -1,23 +1,15 @@
-PROVADOR D'MADAME — FOTOS PARA O EFEITO DE TROCA DE ROUPA
-==========================================================
+PROVADOR D'MADAME
+=================
 
-O efeito fica perfeito quando todas as fotos mostram a MESMA modelo,
-e a única coisa que muda entre elas é a roupa.
+Como funciona hoje
+- manequim.webp é a foto base do manequim (1125 x 2000 px).
+- As roupas são desenhadas em SVG dentro do index.html (procure "lkRisca", "lkDenim",
+  "lkGrafite", "lkNoite"), nas mesmas coordenadas em pixels da foto.
+- Por cima da roupa a foto do manequim é reaplicada em modo "multiply": assim o tecido
+  ganha as sombras do corpo (busto, joelhos, dobras).
+- A lista de looks, textos e peças fica em FIT_LOOKS (no index.html).
 
-Como fotografar (ou gerar) as imagens:
-- Mesma modelo, mesma pose, mesma expressão.
-- Câmera no tripé: mesma altura, distância, lente e zoom em todas.
-- Mesma luz e mesmo fundo (de preferência liso, escuro ou neutro).
-- Corpo inteiro, vertical, com a cabeça perto do topo e os pés perto da base.
-- Proporção vertical ~3:4 (ex.: 1500 x 2150 px), JPG com qualidade ~80%.
-
-Nomes sugeridos (coloque nesta pasta):
-  look-1.jpg, look-2.jpg, look-3.jpg, look-4.jpg ...
-
-Depois, no index.html, procure FIT_LOOKS e troque o campo img de cada look:
-  img: 'assets/provador/look-1.jpg'
-
-Para adicionar ou remover looks, basta adicionar ou remover itens em FIT_LOOKS:
-a seção ajusta a altura, a barra de progresso e o contador sozinha.
-Os campos pos (enquadramento) e sc (zoom) servem para alinhar alguma foto
-que tenha ficado um pouco deslocada.
+Para trocar por fotos reais (opcional)
+- Mesma modelo, mesma pose, mesma câmera no tripé, mesma luz e fundo.
+- Corpo inteiro, vertical, ~3:4. Salve aqui como look-1.jpg, look-2.jpg...
+- Em FIT_LOOKS troque  svg: 'lkRisca'  por  img: 'assets/provador/look-1.jpg'
